@@ -1,0 +1,337 @@
+.case-manager-container {
+  background-color: rgb(243, 244, 246);
+  height: 100%;
+  .el-aside {
+    color: #333;
+    background: #fff;
+    margin: -20px;
+    .search-input {
+     .el-input__inner {
+       border: 0;
+     } 
+    }
+  }
+  .tree-hd {
+    display: flex;
+    flex-shrink: 0;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 40px;
+    box-shadow: rgba(0, 0, 0, 0.0470588) 0px 0px 0px 0px, rgba(0, 0, 0, 0.0470588) 0px 1px 8px 0px;
+    .sectionName {
+      margin-left: 8px;
+    }
+    .tree-hd-left {
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      height: 100%;
+      cursor: default;
+      flex: 1 0 76px;
+      padding: 0px 24px;
+    }
+    .tree-hd-r {
+      position: relative;
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      height: 32px;
+      padding: 0px 8px;
+    }
+    .tree-hd-r-border {
+      position: relative;
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        right: 100%;
+        top: 50%;
+        width: 1px;
+        height: 24px;
+        background-color: rgba(0, 0, 0, 0.0666667);
+        transform: translateY(-50%);
+      }
+      .addTree {
+        vertical-align: middle;
+      }
+    }
+    .el-button  {
+      border: 0;
+      padding: 10px 8px;
+    }
+    .add-tree-item {
+      width: 24px;
+      height: 24px;
+      line-height: 22px;
+      text-align: center;
+      box-shadow: rgba(19, 111, 220, 0.0980392) 0px 4px 8px 0px, rgba(16, 113, 211, 0.0980392) 0px 4px 18px 0px;
+      cursor: pointer;
+      margin: 0px 8px;
+      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiP…AgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==) center center no-repeat rgb(16, 113, 211);
+      border-radius: 50%;
+      transition: background-color 0.3s;
+    }
+  }
+  .el-main {
+    color: #333;
+    text-align: center;
+    height: 100%;
+    box-sizing: border-box;
+    max-width: 960px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.0470588) 0px 1px 4px 0px;
+    margin: 0px auto;
+    padding: 8px 4px;
+    border-radius: 3px;
+    .right-tree-block {
+      -ms-flex: 1;
+      -webkit-box-flex: 1;
+      flex: 1;
+      .el-tree {
+        width: 100%;
+        background: transparent;
+        .el-tree-node__content{
+          height: 40px;
+          .el-input {
+          
+          }
+        
+        }
+        .el-badge__content {
+          top: 7px;
+          right: -2px;
+        }
+        .custom-tree-node {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 14px;
+          padding-right: 8px;
+          i {
+            font-size: 20px;
+            color: #999;
+            &:hover {
+              color: #0099ff;
+            }
+          }
+        }
+        .hover-state {
+          display: none;
+        }
+      }
+    }
+  }
+  .custom-tree-container {
+    display: -ms-flexbox;
+    display: flex;
+    .block {
+      -ms-flex: 1;
+      flex: 1;
+    }
+    .el-tree{
+      width: 100%;
+      background: transparent;
+      .el-tree-node__content{
+        height: 40px;
+        .el-input {
+        
+        }
+      
+      }  
+    }
+    .hover-state {
+      display: none;
+    }
+    .el-tree-node:focus>.el-tree-node__content .custom-tree-node .hover-state ,
+    .el-tree-node__content:hover .custom-tree-node .hover-state 
+    {
+      display: block;
+    }
+    .custom-tree-node {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      padding-right: 8px;
+      i {
+        font-size: 20px;
+        color: #999;
+        &:hover {
+          color: #0099ff;
+        }
+      }
+
+    }
+  }
+  .case-manager-box {
+    display: flex;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+    max-width: 960px;
+    margin: 0px auto;
+    .case-heading {
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1.5;
+    }
+    .case-right-controls {
+      display: flex;
+      -webkit-box-pack: end;
+      justify-content: flex-end;
+      -webkit-box-align: center;
+      align-items: center;
+      flex: 1 1 0%;
+      .case-action-group {
+        position: relative;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        height: 32px;
+        padding: 0px 8px;
+        .el-button  {
+          border: 0;
+          background: transparent;
+          padding: 10px 8px;
+        }
+        .establish-btn {
+          width: 104px;
+          text-align: center;
+          font-size: 13px;
+          margin: 0px -8px 0px 8px;
+          padding: 10px 0px;
+          color: rgb(255, 255, 255);
+          background-color: rgb(16, 113, 211);
+          box-shadow: rgba(19, 111, 220, 0.1) 0px 2px 8px 0px;
+          border-color: rgb(16, 110, 204);
+        }  
+      }
+      .filter-input {
+        width: 192px;
+        margin-right: 5px;
+        .el-input__inner{
+          font-size: 13px;
+          height: 30px;
+          border-radius: 16px;
+          border: 1px solid rgb(213, 218, 224);
+        }
+        .el-input__icon {
+          line-height: 30px;
+        }
+      }
+    }
+  }
+  .el-tree-node:focus>.el-tree-node__content .custom-tree-node .hover-state ,
+  .el-tree-node__content:hover .custom-tree-node .hover-state 
+  {
+    display: block;
+  }
+  .case-action-group + .is-border::before {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 1px;
+    height: 24px;
+    background-color: rgba(0, 0, 0, 0.07);
+    transform: translateY(-50%);
+  }
+  .folder-icon {
+    width: 30px;
+    vertical-align: middle;
+  } 
+  
+}
+.cases-details-box {
+  margin: 30px 60px;
+  .BackButton{
+    display: block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 6px 0px, rgba(5, 35, 90, 0.1) 0px 8px 20px 0px;
+    cursor: pointer;
+    position: absolute;
+    left: 20px;
+    top: 16px;
+    border-radius: 100%;
+    background: #fff;
+  }
+  .case-id {  
+    font-size: 12px;
+    color: rgb(145, 153, 163);
+    line-height: 16px;
+    margin-top: 24px;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 1px 7px;
+    border: 1px solid #dcdfe6;
+  }
+  .case-title {
+    font-size: 28px;
+    font-weight: 400;
+    color: #1f2f3d;
+  }
+  >h3 {
+    margin: 55px 0 20px;
+    font-weight: 400;
+    color: #1f2f3d;
+  }
+ 
+}
+.cases-flex-box {
+  position: relative;
+  margin: -12px;
+  padding: 15px;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box; /* Firefox */
+  -webkit-box-sizing:border-box; /* Safari */
+  cursor: pointer;
+  .flex-box {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    .hd {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      flex: 1;
+      min-width: 0;
+   
+    }
+    .is-right {
+      text-align: right;
+      color: #808080;
+      padding-right: 13px;
+      position: relative;
+    }
+  }
+  &:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid #E5E5E5;
+    color: #E5E5E5;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    left: 15px;
+    right: 15px;
+  }
+  &:hover {
+    background: #ecf5ff;
+  }
+}

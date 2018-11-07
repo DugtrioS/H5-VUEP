@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>folder</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Test-Case---Create-&amp;-Edit" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="用例管理-创建用例-选择模块" transform="translate(-46.000000, -72.000000)">
+            <g id="left-side">
+                <g id="case-section-list" transform="translate(0.000000, 64.000000)">
+                    <g id="case-section">
+                        <g id="section-row">
+                            <g id="folder" transform="translate(46.000000, 8.000000)">
+                                <g id="yellow">
+                                    <g transform="translate(0.000000, 1.000000)">
+                                        <path d="M0,2 L16,2 L16,13 C16,13.5522847 15.5522847,14 15,14 L1,14 C0.44771525,14 6.76353751e-17,13.5522847 0,13 L0,2 Z" id="Rectangle-10" fill="#FFD94B"></path>
+                                        <path d="M1,0 L6.85714286,0 L8,2 L0,2 L0,1 C-6.76353751e-17,0.44771525 0.44771525,1.01453063e-16 1,0 Z" id="Rectangle-11" fill="#F9C433"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

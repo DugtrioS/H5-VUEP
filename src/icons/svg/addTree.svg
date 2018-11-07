@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/create-plus-white</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Test-Cases-/-Manage(v2)" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="用例管理-全部用例(0913)" transform="translate(-412.000000, -116.000000)" fill="#FFFFFF">
+            <g id="left-side" transform="translate(64.000000, 0.000000)">
+                <g id="leftside-head">
+                    <g id="section-row-|-all" transform="translate(0.000000, 108.000000)">
+                        <g id="add-modual" transform="translate(344.000000, 4.000000)">
+                            <g id="icons/create-plus-white" transform="translate(4.000000, 4.000000)">
+                                <path d="M7,7 L7,4 C7,3.44771525 7.44771525,3 8,3 C8.55228475,3 9,3.44771525 9,4 L9,7 L12,7 C12.5522847,7 13,7.44771525 13,8 C13,8.55228475 12.5522847,9 12,9 L9,9 L9,12 C9,12.5522847 8.55228475,13 8,13 C7.44771525,13 7,12.5522847 7,12 L7,9 L4,9 C3.44771525,9 3,8.55228475 3,8 C3,7.44771525 3.44771525,7 4,7 L7,7 Z" id="create-plus"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
