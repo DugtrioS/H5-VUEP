@@ -196,6 +196,13 @@ export default {
     },
     gotoNewUiCase() {
       this.dialogVisible = true;
+      this.form.caseName = null;
+      this.form.describe = null;
+      this.form.steps = null;
+      this.form.beginSteps = null;
+      this.form.endSteps = null;
+      this.form.platform = "android";
+      this.form.id = null;
     },
     savedialog() {
       updateUiTestCases(this.form).then(

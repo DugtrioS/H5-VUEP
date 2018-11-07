@@ -59,16 +59,16 @@
         align="center">
       <template slot-scope="scope">
         <el-button type="primary" size="small" @click="handleClick(scope.row)">编辑</el-button>
-        <el-button type="primary" size="small" @click="1">执行</el-button>
+        <el-button type="primary" size="small" @click="runCases(scope.row)">执行</el-button>
       </template>
       </el-table-column>
     </el-table>
-    <el-dialog
+    <!-- <el-dialog
         title="编辑"
         :visible.sync="dialogVisible"
         width="30%"
         :before-close="handleClose">
-        <el-form ref="form" :model="form" label-width="80px">
+      <el-form ref="form" :model="form" label-width="80px">
             <el-form-item label="环境名称">
                 <el-input v-model="form.name"></el-input>
         </el-form-item>
@@ -86,26 +86,19 @@
             <el-button @click="dialogVisible = false">取 消</el-button>
             <el-button type="primary" @click="dialogVisible = false">保 存</el-button>
         </span>
-    </el-dialog>
+    </el-dialog> -->
   </div>
   
 </template>
 
 <script>
-import { getUiTestCaseSet } from "@/api/table";
+import { getUiTestCaseSet, runUiCases } from "@/api/table";
 
 export default {
   data() {
     return {
       form: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: ""
+
       },
       dialogVisible: false,
       list: null,
@@ -123,17 +116,28 @@ export default {
         this.listLoading = false;
       });
     },
-    newCase() {
-      this.$router.push({ path: "/acrions" });
-    },
     handleClose() {
       this.dialogVisible = false;
     },
-    handleClick() {
-      alert("1231231223");
+    handleClick(valueA) {
+      this.$router.push({path:"/views/testcases/dndlist",query: {id:valueA.id,name:valueA.name,describe:valueA.describe}});
     },
     gotoNewUiAction() {
       this.$router.push({path:"/views/testcases/dndlist"});
+    },
+    runCases(valueId){
+      var ids = {
+        id:valueId.id
+      }
+      runUiCases(ids).then(
+          response=>{
+            if(response.code === 200){
+              this.$message({
+              message: "开始执行",
+              type: "success"})
+              }
+          }
+      )
     }
   }
 };
@@ -144,4 +148,5 @@ export default {
   margin-bottom: 10px;
 }
 </style>
+
 

@@ -1,14 +1,14 @@
 <template>
   <div class="components-container">
     <div>
-      <code>
-        <a href="https://github.com/SortableJS/Vue.Draggable" target="_blank">喵</a>
+      <code class="code-style">
+        <a href="https://github.com/SortableJS/Vue.Draggable" target="_blank">{{casesName}}</a>
       </code>
     </div>
     <div class="input-button-value">
       <el-row>
-        <el-input v-model="inputname" placeholder="场景名称" style="width:300px"></el-input>
-        <el-input v-model="inputdescrib" placeholder="场景描述" style="width:300px"></el-input>
+        名称:<el-input v-model="inputname" placeholder="场景名称" style="width:300px"></el-input>
+        描述:<el-input v-model="inputdescrib" placeholder="场景描述" style="width:300px"></el-input>
         <el-button type="primary" @click="saveAction()">保存场景</el-button>
         <el-button  @click="$router.go(-1)">返回</el-button>
       </el-row>
@@ -29,8 +29,9 @@ export default {
   components: { DndList },
   data() {
     return {
-      inputname:'',
-      inputdescrib:'',
+      casesName:this.$route.query.name?this.$route.query.name:null,
+      inputname:this.$route.query.name?this.$route.query.name:null,
+      inputdescrib:this.$route.query.describe?this.$route.query.describe:null,
       uuidset:'all',
       list1: [],
       list2: []
@@ -38,6 +39,7 @@ export default {
   },
   created() {
     this.getData();
+
   },
   methods: {
     getData() {
@@ -57,7 +59,7 @@ export default {
       jsondata['name'] = this.inputname;
       jsondata['testCasesId'] = pureidlist;
       jsondata['owner'] = this.$store.getters.name;
-      jsondata['id'] = null;
+      jsondata['id'] = this.$route.query.id?this.$route.query.id:null;
       jsondata['describe'] = this.inputdescrib;
       jsondata['showToAll'] = 1;
       updateUiTestCasesSet(jsondata).then(
@@ -83,6 +85,9 @@ export default {
 }
 div {
   margin: 5px;
+}
+.code-style{
+  margin-left: 10px;
 }
 </style>
 
