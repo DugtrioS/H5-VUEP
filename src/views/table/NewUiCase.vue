@@ -46,10 +46,10 @@
           <el-tag :type="scope.row.parameter | statusFilter">{{ scope.row.parameter }}</el-tag>
         </template>
       </el-table-column> -->
-      <el-table-column align="center" prop="up_time" label="最近一次执行" width="200">
+      <el-table-column align="center" prop="up_time" label="描述" width="200">
         <template slot-scope="scope">
-          <i class="el-icon-time"/>
-          <span>{{ scope.row.up_time }}</span>
+          <!-- <i class="el-icon-time"/> -->
+          <span>{{ scope.row.describe }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -93,7 +93,7 @@
 
 <script>
 import { getUiTestCaseSet, runUiCases } from "@/api/table";
-
+import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
@@ -127,7 +127,8 @@ export default {
     },
     runCases(valueId){
       var ids = {
-        id:valueId.id
+        id:valueId.id,
+        runner:this.$store.getters.name?this.$store.getters.name:'ADMIN'
       }
       runUiCases(ids).then(
           response=>{

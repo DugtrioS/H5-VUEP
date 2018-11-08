@@ -31,6 +31,11 @@
           {{ scope.row.env }}
         </template>
       </el-table-column>
+      <el-table-column class-name="status-col" label="库链接" width="400" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.db_config }}
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作" width=auto align="center">
         <template slot-scope="scope">
           <el-button :disabled="disabled" @click="handleClick(scope.row.id)" type="info" size="small">{{btntxt}}</el-button>
@@ -47,6 +52,9 @@
         <el-form-item label="域名地址">
           <el-input v-model="formdialog.path"></el-input>
         </el-form-item>
+        <el-form-item label="库链接">
+          <el-input v-model="formdialog.dbconf"></el-input>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
@@ -61,6 +69,9 @@
         </el-form-item>
         <el-form-item label="域名地址">
           <el-input v-model="newformdialog.env"></el-input>
+        </el-form-item>
+        <el-form-item label="库链接">
+          <el-input v-model="newformdialog.dbconf"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -105,11 +116,13 @@ export default {
       formdialog: {
         title: null,
         path: null,
-        id: null
+        id: null,
+        dbconf:null
       },
       newformdialog: {
         name: null,
-        path: null
+        path: null,
+        dbconf:null
       }
     };
   },
@@ -175,7 +188,8 @@ export default {
       updateEnv(
         this.formdialog.id,
         this.formdialog.path,
-        this.formdialog.title
+        this.formdialog.title,
+        this.formdialog.dbconf
       ).then(response => {
         if (response.code === 200) {
           this.fetchData();
@@ -186,7 +200,7 @@ export default {
       });
     },
     newInfo() {
-      createEnv(this.newformdialog.env, this.newformdialog.name).then(
+      createEnv(this.newformdialog.env, this.newformdialog.name,this.newformdialog.dbconf).then(
         response => {
           if (response.code === 200) {
             this.fetchData();

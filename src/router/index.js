@@ -180,33 +180,33 @@ export const constantRouterMap = [
       }
     ]
   },
-  {
-    path: '/capacity',
-    component: Layout,
-    redirect: '/capacity/index',
-    name: 'Capacity',
-    meta: { title: '性能测试', icon: 'form' },
-    children: [
-      {
-        path: 'index',
-        name: 'Report',
-        component: () => import('@/views/report/index'),
-        meta: { title: 'APP稳定性', icon: 'form' }
-      },
-      {
-        path: 'reportlistForAPPCom',
-        name: 'ReportListForAPPCom',
-        component: () => import('@/views/report/reportlistJ'),
-        meta: { title: 'APP兼容性', icon: 'form' }
-      },
-      {
-        path: 'reportlistForAPPACN',
-        name: 'ReportListForAPPACN',
-        component: () => import('@/views/report/reportlistX'),
-        meta: { title: '接口性能', icon: 'form' }
-      }
-    ]
-  },
+  // {
+  //   path: '/capacity',
+  //   component: Layout,
+  //   redirect: '/capacity/index',
+  //   name: 'Capacity',
+  //   meta: { title: '性能测试', icon: 'form' },
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Report',
+  //       component: () => import('@/views/report/index'),
+  //       meta: { title: 'APP稳定性', icon: 'form' }
+  //     },
+  //     {
+  //       path: 'reportlistForAPPCom',
+  //       name: 'ReportListForAPPCom',
+  //       component: () => import('@/views/report/reportlistJ'),
+  //       meta: { title: 'APP兼容性', icon: 'form' }
+  //     },
+  //     {
+  //       path: 'reportlistForAPPACN',
+  //       name: 'ReportListForAPPACN',
+  //       component: () => import('@/views/report/reportlistX'),
+  //       meta: { title: '接口性能', icon: 'form' }
+  //     }
+  //   ]
+  // },
   {
     path: '/report',
     component: Layout,
@@ -215,16 +215,30 @@ export const constantRouterMap = [
     meta: { title: '报告', icon: 'form' },
     children: [
       {
-        path: 'index',
-        name: 'Report',
-        component: () => import('@/views/report/index'),
+        path: 'reportview',
+        name: 'ReportView',
+        component: () => import('@/views/report/reportlist'),
         meta: { title: '报告视图', icon: 'form' }
       },
       {
         path: 'reportlist',
         name: 'ReportList',
         component: () => import('@/views/report/reportlist'),
-        meta: { title: '报告列表', icon: 'form' }
+        meta: { title: '报告列表', icon: 'form' },
+        children: [
+          {
+            path: 'reportlistJ',
+            component: () => import('@/views/report/reportlistJ'),
+            name: 'ApirePort',
+            meta: { title: 'API报告' }
+          },
+          {
+            path: 'reportlistX',
+            component: () => import('@/views/report/reportlistX'),
+            name: 'UiReport',
+            meta: { title: 'UI报告' }
+          }
+        ]
       },
       {
         path: 'reportdetail',

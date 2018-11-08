@@ -5,12 +5,24 @@
                 <h3> 测试报告总汇</h3>
             </header>
         </div>
-        <div id="leftChart">
+        <!-- <div id="leftChart">
             <chart height="100%" width="100%" :rawData="list"/>
         </div>
         <div id="rightChart">
             
-        </div>
+        </div> -->
+        <el-row :gutter="25">
+          <el-col :lg="8">
+            <div class="chart-wrapper">
+              <pie-chart/>
+            </div>
+          </el-col>
+          <el-col :lg="16">
+            <div class="chart-wrapper">
+              <chart height="300px" width="100%" :rawData="list"/>
+            </div>
+          </el-col>
+        </el-row>
         <div id="upHere">
             <el-table
             v-loading="listLoading"
@@ -106,10 +118,11 @@
 </template>
 
 <script>
+import PieChart from "@/components/Charts/PieChart";
 import G2Line from "@/components/AntV/tingChart";
 import Chart from "@/components/Charts/mixChart";
 export default {
-  components: { Chart, G2Line },
+  components: { Chart, G2Line ,PieChart},
   filters: {
     statusFilter(status) {
       const statusMap = {
@@ -238,12 +251,17 @@ export default {
   margin: 5px;
 }
 #upHere {
-  margin: 325px 5px auto 5px;
+  /* margin: 325px 5px auto 5px; */
 }
 #tagStyle {
   float: left;
 }
 #buttonStyle {
   float: right;
+}
+.chart-wrapper {
+  background: #fff;
+  padding: 16px 16px 0;
+  margin-bottom: 32px;
 }
 </style>

@@ -8,13 +8,14 @@ export function getEnv() {
   })
 }
 
-export function createEnv(env, name) {
+export function createEnv(env, name, db_config) {
   return request({
     url: '/envs/',
     method: 'post',
     data: {
       env,
-      name
+      name,
+      db_config
     }
   })
 }
@@ -32,13 +33,14 @@ export function touchEnv(id) {
   })
 }
 
-export function updateEnv(env_id, env, name) {
+export function updateEnv(env_id, env, name, db_config) {
   return request({
     url: '/envs/' + env_id + '/',
     method: 'post',
     data: {
       env,
-      name
+      name,
+      db_config
     }
   })
 }
