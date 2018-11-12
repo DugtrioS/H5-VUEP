@@ -215,30 +215,21 @@ export const constantRouterMap = [
     meta: { title: '报告', icon: 'form' },
     children: [
       {
-        path: 'reportview',
-        name: 'ReportView',
-        component: () => import('@/views/report/reportlist'),
-        meta: { title: '报告视图', icon: 'form' }
-      },
-      {
         path: 'reportlist',
         name: 'ReportList',
         component: () => import('@/views/report/reportlist'),
-        meta: { title: '报告列表', icon: 'form' },
-        children: [
-          {
-            path: 'reportlistJ',
-            component: () => import('@/views/report/reportlistJ'),
-            name: 'ApirePort',
-            meta: { title: 'API报告' }
-          },
-          {
-            path: 'reportlistX',
-            component: () => import('@/views/report/reportlistX'),
-            name: 'UiReport',
-            meta: { title: 'UI报告' }
-          }
-        ]
+        meta: { title: '报告列表', icon: 'form' }},
+      {
+        path: 'reportlistJ',
+        component: () => import('@/views/report/reportlistJ'),
+        name: 'ApirePort',
+        meta: { title: 'API报告' }
+      },
+      {
+        path: 'uireport',
+        component: () => import('@/views/report/uireport'),
+        name: 'UiReport',
+        meta: { title: 'UI报告' }
       },
       {
         path: 'reportdetail',

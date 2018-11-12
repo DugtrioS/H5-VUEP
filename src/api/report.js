@@ -1,12 +1,15 @@
 import request from '@/utils/request'
 
-export function login(username, password) {
+export function getUiRepById(id) {
   return request({
-    url: '/user/login/',
-    method: 'post',
-    data: {
-      username,
-      password
-    }
+    url: '/ui-set-results/' + id + '/',
+    method: 'get'
+  })
+}
+
+export function getUiRep() {
+  return request({
+    url: '/ui-set-results/',
+    method: 'get'
   })
 }

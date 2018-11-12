@@ -30,3 +30,16 @@ export function validatAlphabets(str) {
   const reg = /^[A-Za-z]+$/
   return reg.test(str)
 }
+
+export function strim(str) {
+  if (typeof (str) === 'string') {
+    str.replace(/^\s*|\s*$/g, '')
+    str.replace(/\r\n/g, '')
+    str.replace(/\n/g, '')
+    str.replace(/\s/g, '')
+    str.replace(/\t/g, '')
+    return str
+  } else {
+    return str
+  }
+}

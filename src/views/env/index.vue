@@ -53,7 +53,10 @@
           <el-input v-model="formdialog.path"></el-input>
         </el-form-item>
         <el-form-item label="库链接">
-          <el-input v-model="formdialog.dbconf"></el-input>
+          <el-input 
+              v-model="formdialog.dbconf"
+              type="textarea"
+              :autosize="{ minRows: 2, maxRows: 4}"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -71,7 +74,10 @@
           <el-input v-model="newformdialog.env"></el-input>
         </el-form-item>
         <el-form-item label="库链接">
-          <el-input v-model="newformdialog.dbconf"></el-input>
+          <el-input 
+              v-model="newformdialog.dbconf"
+              type="textarea"
+              :autosize="{ minRows: 2, maxRows: 4}"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -90,6 +96,7 @@
 
 <script>
 import { getEnv, createEnv, getEnvById, updateEnv, touchEnv } from "@/api/env";
+import {strim} from "@/utils/validate";
 export default {
   filters: {},
   data() {
@@ -181,10 +188,10 @@ export default {
       this.formdialog.title = dataScope.name;
       this.formdialog.path = dataScope.env;
       this.formdialog.id = dataScope.id;
+      this.formdialog.dbconf = dataScope.db_config;
     },
     saveInfo() {
       // console.log(this.form);
-
       updateEnv(
         this.formdialog.id,
         this.formdialog.path,
