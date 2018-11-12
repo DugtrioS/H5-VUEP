@@ -59,7 +59,7 @@ export default {
       jsondata['name'] = this.inputname;
       jsondata['testCasesId'] = pureidlist;
       jsondata['owner'] = this.$store.getters.name;
-      jsondata['id'] = this.$route.query.id?this.$route.query.id:null;
+      jsondata['id'] = this.$route.query.id?this.$route.query.id:'';
       jsondata['describe'] = this.inputdescrib;
       jsondata['showToAll'] = 1;
       updateUiTestCasesSet(jsondata).then(
