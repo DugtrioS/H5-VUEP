@@ -71,12 +71,12 @@
                     {{scope.row.id}}mm
                 </template>
             </el-table-column> -->
-            <!-- <el-table-column align=center label="详细" width="150px">
+            <el-table-column align=center label="详细" width="150px">
                 <template slot-scope="scope">
-                    <el-tag style="float: left;" :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+                    <!-- <el-tag style="float: left;" :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag> -->
                     <el-button id="buttonStyle" type="primary" size="small" @click="jumpToDetail(scope.row.id)">查看</el-button>
                 </template>
-            </el-table-column> -->
+            </el-table-column>
         </el-table>
     </div>
 </template>
@@ -135,6 +135,9 @@ export default {
       } else {
         return;
       }
+    },
+    jumpToDetail(valueA){
+      this.$router.push({path:"/views/report/reportdetail",query: {id:valueA}});
     }
   }
 };

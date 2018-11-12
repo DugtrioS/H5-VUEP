@@ -223,19 +223,13 @@ export const constantRouterMap = [
         path: 'reportlistJ',
         component: () => import('@/views/report/reportlistJ'),
         name: 'ApirePort',
-        meta: { title: 'API报告' }
+        meta: { title: 'API报告', icon: 'form' }
       },
       {
         path: 'uireport',
         component: () => import('@/views/report/uireport'),
         name: 'UiReport',
-        meta: { title: 'UI报告' }
-      },
-      {
-        path: 'reportdetail',
-        name: 'ReportDetail',
-        component: () => import('@/views/report/reportdetail'),
-        hidden: true
+        meta: { title: 'UI报告', icon: 'form' }
       }
     ]
   },

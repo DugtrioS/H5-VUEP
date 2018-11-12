@@ -126,6 +126,9 @@ export default {
       this.$router.push({path:"/views/testcases/dndlist"});
     },
     runCases(valueId){
+      this.$message({
+              message: "发送执行队列,执行中",
+              type: "success"})
       var ids = {
         id:valueId.id,
         runner:this.$store.getters.name?this.$store.getters.name:'ADMIN'
@@ -134,7 +137,7 @@ export default {
           response=>{
             if(response.code === 200){
               this.$message({
-              message: "开始执行",
+              message: "执行完毕",
               type: "success"})
               }
           }

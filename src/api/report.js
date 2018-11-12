@@ -13,3 +13,10 @@ export function getUiRep() {
     method: 'get'
   })
 }
+
+export function getUiCaseRepById(id) {
+  return request({
+    url: '/ui-set-results/',
+    method: 'get'
+  })
+}
