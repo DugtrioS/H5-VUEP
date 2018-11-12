@@ -11,17 +11,21 @@
                 <el-table-column type="expand">
                 <template slot-scope="props">
                     <el-form label-position="left" inline class="demo-table-expand">
-                        <el-form-item label="开始时间: ">
-                            <span>{{ props.row.startTime }}</span>
-                        </el-form-item>
-                        <el-form-item>
-                        </el-form-item>
-                        <el-form-item label="结束时间： ">
-                            <span>{{ props.row.endTime }}</span>
-                        </el-form-item>
-                        <el-form-item label="持续时间： ">
-                            <span>{{ props.row.continueTime }}</span>
-                        </el-form-item>
+                        <el-col :span="23">
+                            <el-form-item label="开始时间: ">
+                                <span>{{ props.row.startTime }}</span>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="23">
+                            <el-form-item label="结束时间： ">
+                                <span>{{ props.row.endTime }}</span>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="23">
+                            <el-form-item label="持续时间： ">
+                                <span>{{ props.row.continueTime }}</span>
+                            </el-form-item>
+                        </el-col>
                     </el-form>
                 </template>
             </el-table-column>
@@ -30,18 +34,18 @@
                     {{scope.row.id}}
                 </template>
             </el-table-column>
-            <el-table-column align="center" label="ui场景名称" width="auto">
+            <el-table-column align="center" label="UI场景名称" width="auto">
                 <template slot-scope="scope">
                     {{scope.row.correspondingSet}}
                 </template>
             </el-table-column>
-            <el-table-column align="center" label="执行结果" width="auto">
+            <el-table-column align="center" label="执行结果" width="100px">
                 <template slot-scope="scope">
                     <el-tag style="center" :type="scope.row.result | statusFilter">{{ scope.row.result }}</el-tag>
                     <!-- {{scope.row.result}} -->
                 </template>
             </el-table-column>
-            <el-table-column align="center" label="用例数量" width="auto">
+            <el-table-column align="center" label="用例数量" width="100px">
                 <template slot-scope="scope">
                     {{scope.row.number}}
                 </template>
@@ -61,7 +65,7 @@
                     {{scope.row.continueTime}}
                 </template>
             </el-table-column> -->
-            <el-table-column align="center" label="执行者" width="auto">
+            <el-table-column align="center" label="执行者" width="120px">
                 <template slot-scope="scope">
                     {{scope.row.runner}}
                 </template>

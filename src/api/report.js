@@ -16,7 +16,7 @@ export function getUiRep() {
 
 export function getUiCaseRepById(id) {
   return request({
-    url: '/ui-set-results/',
+    url: '/ui-case-results/' + id + '/',
     method: 'get'
   })
 }

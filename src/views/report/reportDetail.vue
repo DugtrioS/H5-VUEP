@@ -36,12 +36,12 @@
                     {{scope.row.id}}
                 </template>
             </el-table-column>
-            <el-table-column align="center" label="对应UICASE_ID" width="auto">
+            <el-table-column align="center" label="UI_CASE_ID" width="180px">
                 <template slot-scope="scope">
                     {{scope.row.correspondingCases}}
                 </template>
             </el-table-column>
-            <el-table-column align="center" label="执行结果" width="auto">
+            <el-table-column align="center" label="执行结果" width="80px">
                 <template slot-scope="scope">
                     <el-tag style="center" :type="scope.row.result | statusFilter">{{ scope.row.result }}</el-tag>
                     <!-- {{scope.row.result}} -->
@@ -72,11 +72,11 @@
                     {{scope.row.continueTime}}
                 </template>
             </el-table-column> -->
-            <el-table-column align="center" label="执行者" width="auto">
+            <!-- <el-table-column align="center" label="执行者" width="120px">
                 <template slot-scope="scope">
                     {{scope.row.runner}}
                 </template>
-            </el-table-column>
+            </el-table-column> -->
             <!-- <el-table-column align="center" label="耗时" width="auto">
                 <template slot-scope="scope">
                     {{scope.row.id}}mm
@@ -94,7 +94,7 @@
 
 
 <script>
-import { getUiRep } from "@/api/report";
+import { getUiCaseRepById } from "@/api/report";
 export default {
     filters: {
     statusFilter(status) {
@@ -108,7 +108,7 @@ export default {
   data() {
     return {
       reportlistdata: null,
-      uireportid:''
+      uireportid:this.$route.query.id?this.$route.query.id:''
     };
   },
   created() {
@@ -117,7 +117,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true;
-      getUiRep().then(response => {
+      getUiCaseRepById(this.uireportid).then(response => {
         this.reportlistdata = response.results;
         this.listLoading = false;
       });

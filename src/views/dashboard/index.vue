@@ -1,14 +1,15 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name:{{ name }}</div>
-    <div class="dashboard-text">roles:<span v-for="role in roles" :key="role">{{ role }}</span></div>
-    <div>
+    <div class="dashboard-text">登陆者:{{ name }}</div>
+    <div class="dashboard-text">TO DO AND DOING:</div>
+    <!-- <span v-for="role in roles" :key="role">{{ role }}</span> -->
+    <!-- <div>
       <el-switch
       v-model="value2"
       active-color="#13ce66"
       inactive-color="#ff4949">
       </el-switch>
-    </div>
+    </div> -->
     <div>
       <ul>
         <li v-for='(list) in value3' v-bind:key='list'>{{list}}</li>
