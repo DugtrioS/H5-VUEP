@@ -34,7 +34,7 @@
                     {{scope.row.id}}
                 </template>
             </el-table-column>
-            <el-table-column align="center" label="UI场景名称" width="auto">
+            <el-table-column align="left" label="UI场景名称" width="auto">
                 <template slot-scope="scope">
                     {{scope.row.correspondingSet}}
                 </template>

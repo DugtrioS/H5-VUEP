@@ -359,6 +359,16 @@ export const constantRouterMap = [
     }]
   },
   {
+    path: '/newapiaction',
+    redirect: '/views/table/index',
+    component: Layout,
+    hidden: true,
+    children: [{
+      path: '/views/testcases/dndApilist',
+      component: () => import('@/views/testcases/dndApilist')
+    }]
+  },
+  {
     path: '/reportdetail',
     redirect: '/views/report/reportlist',
     component: Layout,
