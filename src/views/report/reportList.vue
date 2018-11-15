@@ -250,9 +250,6 @@ export default {
   float: right;
   margin: 5px;
 }
-#upHere {
-  /* margin: 325px 5px auto 5px; */
-}
 #tagStyle {
   float: left;
 }

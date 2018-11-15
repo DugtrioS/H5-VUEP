@@ -60,10 +60,10 @@ export const constantRouterMap = [
         meta: { title: '环境管理', icon: 'example' }
       },
       {
-        path: 'automationtest',
-        name: 'automationtest',
-        component: () => import('@/views/env/automation/automationtest'),
-        meta: { title: '用户管理', icon: 'example' },
+        path: 'Resources',
+        name: 'Resources',
+        component: () => import('@/views/env/automation/Resources'),
+        meta: { title: '资源管理', icon: 'example' },
         children: [
           {
             hidden: true,

@@ -8,7 +8,6 @@
         <li class="fl"><a href="#header">#请求头</a></li>
         <li class="fl"><a href="#request">#请求参数</a></li>
         <li class="fl"><a href="#response">#返回参数</a></li>
-        <li class="fl"><a href="#demo">#返回示例</a></li>
       </ul>
     </div>
     <div class="main-content">
@@ -265,32 +264,7 @@
           <div style="margin-top:5px;margin-right: 5px;text-align:right;"> + 添加一行</div>
         </div>
       </div>
-      <div class="section" id="demo">
-        <p>返回示例</p>
-        <div class="content">
-          <table class="table" border="1" cellspacing="0" cellpadding="0" bordercolor="#ddd" width="100%">
-            <tr>
-                <td class="tc w120">
-                  <div>正确返回示例</div>
-                  <button class="format">格式化数据</button>
-                </td>
-                <td clas="tc h150">
-                  <textarea name="" id="" cols="30" rows="10" class="text" placeholder="请用标准json结构如：{'success':true}"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td class="tc w120">
-                  <div>错误返回示例</div>
-                  <button class="format">格式化数据</button>
-                </td>
-                <td clas="tc h150">
-                  <textarea name="" id="" cols="30" rows="10" class="text" placeholder="请用标准json结构如：{'success':false}"></textarea>
-                </td>
-            </tr>
-          </table>
-        </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -298,96 +272,101 @@
 export default {
   data() {
     return {
-      id:null,
+      id: null,
       // 基础信息
       isFixed: false,
       value: 1,
       options: [
-        {label: '模块1', value: 1},
-        {label: '模块2', value: 2},
-        {label: '模块3', value: 3},
+        { label: "模块1", value: 1 },
+        { label: "模块2", value: 2 },
+        { label: "模块3", value: 3 }
       ],
       value2: 1,
       options2: [
-        {label: 'GET', value: 1},
-        {label: 'POST', value: 2},
-        {label: 'PUT', value: 3},
+        { label: "GET", value: 1 },
+        { label: "POST", value: 2 },
+        { label: "PUT", value: 3 }
       ],
       value3: 1,
       options3: [
-        {label: '已上线', value: 1},
-        {label: '开发中', value: 2},
-        {label: '测试中', value: 3},
-        {label: '废弃', value: 4},
+        { label: "已上线", value: 1 },
+        { label: "开发中", value: 2 },
+        { label: "测试中", value: 3 },
+        { label: "废弃", value: 4 }
       ],
       value4: 1,
       options4: [
-        {label: 'application/json', value: 1},
-        {label: 'text/html', value: 2},
-        {label: 'x-application', value: 3},
-        {label: 'application/xml', value: 4},
+        { label: "application/json", value: 1 },
+        { label: "text/html", value: 2 },
+        { label: "x-application", value: 3 },
+        { label: "application/xml", value: 4 }
       ],
       value5: 1,
       options5: [
-        {label: 'erro1', value: 1},
-        {label: 'erro2', value: 2},
-        {label: 'erro3', value: 3},
-        {label: 'erro4', value: 4},
+        { label: "erro1", value: 1 },
+        { label: "erro2", value: 2 },
+        { label: "erro3", value: 3 },
+        { label: "erro4", value: 4 }
       ],
       // 请求头
       headerData: [
-        {name: '',need: '',type: '',default: '',mark: '',operation: ''}
+        { name: "", need: "", type: "", default: "", mark: "", operation: "" }
       ],
       requestData: [
-        {name: '',need: '',type: '',default: '',mark: '',operation: ''}
+        { name: "", need: "", type: "", default: "", mark: "", operation: "" }
       ],
       value6: 1,
-      options6: [
-        {label: '是', value: 1},
-        {label: '否', value: 2}
-      ],
+      options6: [{ label: "是", value: 1 }, { label: "否", value: 2 }],
       value7: 1,
       options7: [
-        {label: 'string', value: 1},
-        {label: 'int', value: 2},
-        {label: 'float', value: 3},
-        {label: 'long', value: 4},
-        {label: 'byte', value: 5},
-        {label: 'double', value: 6},
-        {label: 'number', value: 7},
-        {label: 'boolean', value: 8},
-        {label: 'object', value: 9},
-        {label: 'array', value: 10},
-        {label: 'array[string]', value: 11},
-        {label: 'array[int]', value: 12},
-        {label: 'array[float]', value: 13},
-        {label: 'array[long]', value: 14},
-        {label: 'array[byte]', value: 15},
-        {label: 'array[double]', value: 16},
-        {label: 'array[number]', value: 17},
-        {label: 'array[boolean]', value: 18},
-        {label: 'array[object]', value: 19},
-        {label: 'file', value: 20}
+        { label: "string", value: 1 },
+        { label: "int", value: 2 },
+        { label: "float", value: 3 },
+        { label: "long", value: 4 },
+        { label: "byte", value: 5 },
+        { label: "double", value: 6 },
+        { label: "number", value: 7 },
+        { label: "boolean", value: 8 },
+        { label: "object", value: 9 },
+        { label: "array", value: 10 },
+        { label: "array[string]", value: 11 },
+        { label: "array[int]", value: 12 },
+        { label: "array[float]", value: 13 },
+        { label: "array[long]", value: 14 },
+        { label: "array[byte]", value: 15 },
+        { label: "array[double]", value: 16 },
+        { label: "array[number]", value: 17 },
+        { label: "array[boolean]", value: 18 },
+        { label: "array[object]", value: 19 },
+        { label: "file", value: 20 }
       ]
-
-    }
+    };
   },
-  mounted () {
-    window.addEventListener('scroll', this.handleScroll)
-    this.id = this.$route.query.id
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+    this.id = this.$route.query.id;
   },
   methods: {
-    addMoreData(){
-      console.log(this.headerData)
-      this.headerData.push({name: '',need: '',type: '',default: '',mark: '',operation: ''})
-      
+    addMoreData() {
+      console.log(this.headerData);
+      this.headerData.push({
+        name: "",
+        need: "",
+        type: "",
+        default: "",
+        mark: "",
+        operation: ""
+      });
     },
     setClass() {
-      return 'isFix'
+      return "isFix";
     },
     handleScroll() {
-      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-      this.isFixed = scrollTop>= 50
+      var scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      this.isFixed = scrollTop >= 50;
     }
   }
 };
@@ -396,7 +375,7 @@ export default {
 <style lang="scss" scoped>
 .interface {
   position: relative;
-  background-color: #F2F3F7;
+  background-color: #f2f3f7;
   .fl {
     float: left;
   }
@@ -406,7 +385,7 @@ export default {
   .clearfix {
     &::after {
       display: table;
-      content: '';
+      content: "";
       clear: both;
     }
   }
@@ -458,7 +437,7 @@ export default {
       margin: 0;
       padding-left: 20px;
       line-height: 40px;
-      background-color: #F2F3F7;
+      background-color: #f2f3f7;
     }
     #basic {
       border-top: 3px solid #005eef;

@@ -5,6 +5,9 @@
                 <el-form-item label="Activity name:">
                     <el-input style="width:300px" v-model="form.name"/>
                 </el-form-item>
+                <el-form-item label="Describe :">
+                    <el-input type="textarea" style="width:300px;" v-model="form.describe"/>
+                </el-form-item>
            </el-form>
         </div>
         <div class="components-container board">
@@ -28,7 +31,8 @@ export default {
   data() {
     return {
       form: {
-        name: null
+        name: null,
+        describe:null
       },
       options: {
         group: "mission"
