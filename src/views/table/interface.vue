@@ -7,7 +7,7 @@
         <li class="fl"><a href="#basic">#基础信息</a></li>
         <li class="fl"><a href="#header">#请求头</a></li>
         <li class="fl"><a href="#request">#请求参数</a></li>
-        <li class="fl"><a href="#response">#返回参数</a></li>
+        <li class="fl"><a href="#response">#断言</a></li>
       </ul>
     </div>
     <div class="main-content">
@@ -109,9 +109,14 @@
         <p>请求头</p>
         <div class="content">
           <el-table :data="headerData" style="width: 100%" fit>
-            <el-table-column prop="name" label="名称" width="550">
+            <el-table-column prop="name" label="KEY" width="450">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.name" class="w100p" type="text" placeholder="名称" border="none"></el-input>
+                <el-input v-model="scope.row.name" class="w100p" type="text" placeholder="KEY" border="none"></el-input>
+              </template>
+            </el-table-column>
+            <el-table-column prop="name" label="VALUE" width="450">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.name" class="w100p" type="text" placeholder="VALUE" border="none"></el-input>
               </template>
             </el-table-column>
             <el-table-column prop="need" label="必填" width="100">
@@ -126,23 +131,6 @@
                 </el-select>
               </template>
             </el-table-column>
-            <el-table-column prop="type" label="类型">
-              <template slot-scope="scope">
-                <el-select class="w100p no-border" v-model="value7" placeholder="">
-                  <el-option
-                    v-for="item in options7"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                  </el-option>
-                </el-select>
-              </template>
-            </el-table-column>
-            <el-table-column prop="default" label="默认值">
-              <template slot-scope="scope">
-                <el-input class="w100p" type="text" placeholder="接口排序"></el-input>
-              </template>
-            </el-table-column>
             <el-table-column prop="mark" label="备注">
               <template slot-scope="scope">
                 <el-input class="w100p" type="text" placeholder="备注"></el-input>
@@ -151,7 +139,6 @@
             <el-table-column prop="operation" label="操作" width="120">
               <template slot-scope="scope" class="clearfix">
                 <button class="fl" style="margin-right:5px">删除</button>
-                <button class="fl">移动</button>
               </template>
             </el-table-column>
           </el-table>
@@ -162,9 +149,14 @@
         <p>请求参数</p>
         <div class="content">
           <el-table :data="requestData" style="width: 100%" fit>
-            <el-table-column prop="name" label="名称" width="550">
+            <el-table-column prop="name" label="KEY" width="450">
               <template slot-scope="scope">
-                <el-input class="w100p" type="text" placeholder="名称" border="none"></el-input>
+                <el-input class="w100p" type="text" placeholder="KEY" border="none"></el-input>
+              </template>
+            </el-table-column>
+            <el-table-column prop="name" label="VALUE" width="450">
+              <template slot-scope="scope">
+                <el-input class="w100p" type="text" placeholder="VALUE" border="none"></el-input>
               </template>
             </el-table-column>
             <el-table-column prop="need" label="必填" width="100">
@@ -189,11 +181,6 @@
                     :value="item.value">
                   </el-option>
                 </el-select>
-              </template>
-            </el-table-column>
-            <el-table-column prop="default" label="默认值">
-              <template slot-scope="scope">
-                <el-input class="w100p" type="text" placeholder="接口排序"></el-input>
               </template>
             </el-table-column>
             <el-table-column prop="mark" label="备注">
@@ -204,7 +191,6 @@
             <el-table-column prop="operation" label="操作" width="120">
               <template slot-scope="scope" class="clearfix">
                 <button class="fl" style="margin-right:5px" >删除</button>
-                <button class="fl">移动</button>
               </template>
             </el-table-column>
           </el-table>
@@ -212,15 +198,15 @@
         </div>
       </div>
       <div class="section" id="response">
-        <p>返回参数</p>
+        <p>断言</p>
         <div class="content">
           <el-table :data="headerData" style="width: 100%" fit>
-            <el-table-column prop="name" label="名称" width="550">
+            <el-table-column prop="name" label="实际参数" width="450">
               <template slot-scope="scope">
-                <el-input class="w100p" type="text" placeholder="名称" border="none"></el-input>
+                <el-input class="w100p" type="text" placeholder="" border="none"></el-input>
               </template>
             </el-table-column>
-            <el-table-column prop="need" label="必填" width="100">
+            <!-- <el-table-column prop="need" label="必填" width="100">
               <template slot-scope="scope">
                 <el-select class="w100p no-border" v-model="value6" placeholder="">
                   <el-option
@@ -231,12 +217,12 @@
                   </el-option>
                 </el-select>
               </template>
-            </el-table-column>
-            <el-table-column prop="type" label="类型">
+            </el-table-column> -->
+            <el-table-column prop="type" label="比较符">
               <template slot-scope="scope">
                 <el-select class="w100p no-border" v-model="value7" placeholder="">
                   <el-option
-                    v-for="item in options7"
+                    v-for="item in options8"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
@@ -244,20 +230,26 @@
                 </el-select>
               </template>
             </el-table-column>
-            <el-table-column prop="default" label="默认值">
+            <el-table-column prop="default" label="期望参数" width="450">
               <template slot-scope="scope">
-                <el-input class="w100p" type="text" placeholder="接口排序"></el-input>
+                <el-input class="w100p" type="text" placeholder=""></el-input>
               </template>
             </el-table-column>
-            <el-table-column prop="mark" label="备注">
+            <el-table-column prop="type" label="类型">
               <template slot-scope="scope">
-                <el-input class="w100p" type="text" placeholder="备注"></el-input>
+                <el-select class="w100p no-border" v-model="value7" placeholder="">
+                  <el-option
+                    v-for="item in options9"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
               </template>
             </el-table-column>
             <el-table-column prop="operation" label="操作" width="120">
               <template slot-scope="scope" class="clearfix">
                 <button class="fl" style="margin-right:5px">删除</button>
-                <button class="fl">移动</button>
               </template>
             </el-table-column>
           </el-table>
@@ -285,7 +277,8 @@ export default {
       options2: [
         { label: "GET", value: 1 },
         { label: "POST", value: 2 },
-        { label: "PUT", value: 3 }
+        { label: "PUT", value: 3 },
+        { label: "WS", value: 3 }
       ],
       value3: 1,
       options3: [
@@ -339,6 +332,21 @@ export default {
         { label: "array[boolean]", value: 18 },
         { label: "array[object]", value: 19 },
         { label: "file", value: 20 }
+      ],
+      options8: [
+        { label: ">", value: 1 },
+        { label: "<", value: 2 },
+        { label: ">=", value: 3 },
+        { label: "<=", value: 4 },
+        { label: "==", value: 5 },
+        { label: "?", value: 6 },
+        { label: "!", value: 7 },
+        { label: "⊆", value: 8 }
+      ],
+      options9:[
+        { label: "SQL", value: 1 },
+        { label: "WS_SERV", value: 2 },
+        { label: "K_V", value: 3 }
       ]
     };
   },

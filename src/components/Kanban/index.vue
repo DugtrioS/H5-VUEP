@@ -11,8 +11,12 @@
         <!-- {{ element.name }} {{ element.id }} -->
           <el-collapse v-model="activeNames" @change="handleChange" >
             <el-collapse-item title="一致性 Consistency" name="1">
-              <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-              <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+              <div class="formapi1 clearfix" :class="{ 'isFix': isFixed}">
+                  123
+              </div>
+              <div class="formapi2"></div>
+              <div class="formapi3"></div>
+              <div class="formapi4"></div>
             </el-collapse-item>
           </el-collapse>
       </div>
@@ -58,7 +62,7 @@ export default {
 </script>
 <style lang="scss">
 .board-column {
-  min-width: 700px;
+  // min-width: 250px;
   min-height: 100px;
   height: auto;
   overflow: hidden;
