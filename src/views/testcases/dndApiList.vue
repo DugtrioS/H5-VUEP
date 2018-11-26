@@ -12,7 +12,7 @@
         </div>
         <div class="components-container board">
             <div style="display:inline-block">
-                <Kanban :key="1" :list="list1" :options="options" class="kanban todo" header-text="接口用例列表" style="width:300px"/>
+                <Kanban  :key="1" :list="list1" :options="options" class="kanban todo" header-text="接口用例列表" style="width:300px"/>
             </div>
             <div style="display:inline-block">
                 <Kanban :key="2" :list="list2" :options="options" class="kanban working" header-text="接口场景"  style="width:1200px"/>
@@ -32,7 +32,7 @@ export default {
     return {
       form: {
         name: null,
-        describe:null
+        describe: null
       },
       options: {
         group: "mission"
@@ -49,6 +49,11 @@ export default {
         { name: "Mission", id: 7 }
       ]
     };
+  },
+  methods: {
+    onEnd() {
+      alert("1234567890");
+    }
   }
 };
 </script>
@@ -74,6 +79,5 @@ export default {
     }
   }
 }
-
 </style>
 

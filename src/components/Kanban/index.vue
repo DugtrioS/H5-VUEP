@@ -6,12 +6,13 @@
     <draggable
       :list="list"
       :options="options"
-      class="board-column-content">
+      class="board-column-content"
+      >
       <div v-for="element in list" :key="element.id" class="board-item">
         <!-- {{ element.name }} {{ element.id }} -->
           <el-collapse v-model="activeNames" @change="handleChange" >
-            <el-collapse-item title="一致性 Consistency" name="1">
-              <div class="formapi1 clearfix" :class="{ 'isFix': isFixed}">
+            <el-collapse-item title="一致性 Consistency">
+              <div class="formapi1">
                   123
               </div>
               <div class="formapi2"></div>
@@ -29,7 +30,9 @@ import draggable from "vuedraggable";
 
 export default {
   data() {
-    activeNames: ["1"];
+    return{
+      activeNames:['1']
+    }
   },
   name: "DragKanbanDemo",
   components: {
@@ -55,7 +58,7 @@ export default {
   },
   methods: {
     handleChange(val) {
-      console.log(val);
+      alert(val)
     }
   }
 };

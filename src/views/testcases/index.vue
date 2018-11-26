@@ -31,7 +31,7 @@ export default {
           label: "海风智学中心"
         },
         {
-          value: "海风家委会",
+          value: '海风家委会',
           label: "海风家委会"
         }
       ]
