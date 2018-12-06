@@ -50,27 +50,6 @@
                   </el-option>
                 </el-select>
               </td>
-              <td class="tc w100">状态 *</td>
-              <td class="tc">
-                <el-select class="w100p" v-model="value3" placeholder="请选择">
-                  <el-option
-                    v-for="item in options3"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                  </el-option>
-                </el-select>
-              </td>
-            </tr>
-            <tr>
-              <td class="tc w100">版本号 *</td>
-              <td class="tc">
-                <el-input class="w100p" type="text" placeholder="版本号"></el-input>
-              </td>
-              <td class="tc w100">排序</td>
-              <td class="tc">
-                <el-input class="w100p" type="text" placeholder="接口排序"></el-input>
-              </td>
             </tr>
             <tr>
               <td class="tc w100">返回类型 *</td>
@@ -78,17 +57,6 @@
                 <el-select class="w100p" v-model="value4" placeholder="请选择">
                   <el-option
                     v-for="item in options4"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                  </el-option>
-                </el-select>
-              </td>
-              <td class="tc w100">错误列表</td>
-              <td class="tc">
-                <el-select class="w100p" v-model="value5" placeholder="请选择">
-                  <el-option
-                    v-for="item in options5"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
@@ -109,31 +77,14 @@
         <p>请求头</p>
         <div class="content">
           <el-table :data="headerData" style="width: 100%" fit>
-            <el-table-column prop="name" label="KEY" width="450">
+            <el-table-column prop="name" label="KEY" width="500">
               <template slot-scope="scope">
                 <el-input v-model="scope.row.name" class="w100p" type="text" placeholder="KEY" border="none"></el-input>
               </template>
             </el-table-column>
-            <el-table-column prop="name" label="VALUE" width="450">
+            <el-table-column prop="name" label="VALUE" width="500">
               <template slot-scope="scope">
                 <el-input v-model="scope.row.name" class="w100p" type="text" placeholder="VALUE" border="none"></el-input>
-              </template>
-            </el-table-column>
-            <el-table-column prop="need" label="必填" width="100">
-              <template slot-scope="scope">
-                <el-select class="w100p no-border" v-model="value6" placeholder="">
-                  <el-option
-                    v-for="item in options6"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                  </el-option>
-                </el-select>
-              </template>
-            </el-table-column>
-            <el-table-column prop="mark" label="备注">
-              <template slot-scope="scope">
-                <el-input class="w100p" type="text" placeholder="备注"></el-input>
               </template>
             </el-table-column>
             <el-table-column prop="operation" label="操作" width="120">

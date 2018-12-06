@@ -207,6 +207,7 @@ export default {
       });
     },
     newInfo() {
+      console.log(this.formdialog)
       createEnv(this.newformdialog.env, this.newformdialog.name,this.newformdialog.dbconf).then(
         response => {
           if (response.code === 200) {
