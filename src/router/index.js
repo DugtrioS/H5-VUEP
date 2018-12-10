@@ -119,10 +119,10 @@ export const constantRouterMap = [
         meta: { title: '接口维护', icon: 'example' }
       },
       {
-        path: 'relationship',
-        name: 'Relationship',
-        component: () => import('@/views/env/rawapi'),
-        meta: { title: '接口表关系维护', icon: 'example' }
+        path: 'apiaction',
+        name: 'ApiAction',
+        component: () => import('@/views/env/apiaction'),
+        meta: { title: '接口场景', icon: 'example' }
       }
     ]
   },
@@ -180,33 +180,6 @@ export const constantRouterMap = [
       }
     ]
   },
-  // {
-  //   path: '/capacity',
-  //   component: Layout,
-  //   redirect: '/capacity/index',
-  //   name: 'Capacity',
-  //   meta: { title: '性能测试', icon: 'form' },
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'Report',
-  //       component: () => import('@/views/report/index'),
-  //       meta: { title: 'APP稳定性', icon: 'form' }
-  //     },
-  //     {
-  //       path: 'reportlistForAPPCom',
-  //       name: 'ReportListForAPPCom',
-  //       component: () => import('@/views/report/reportlistJ'),
-  //       meta: { title: 'APP兼容性', icon: 'form' }
-  //     },
-  //     {
-  //       path: 'reportlistForAPPACN',
-  //       name: 'ReportListForAPPACN',
-  //       component: () => import('@/views/report/reportlistX'),
-  //       meta: { title: '接口性能', icon: 'form' }
-  //     }
-  //   ]
-  // },
   {
     path: '/report',
     component: Layout,
