@@ -1,34 +1,57 @@
 <template>
-    <div>
-        <div class="form-container">
-           <el-form :inline="true" ref="form" :model="form" label-width="100px" style="margin:10px">
-                <el-form-item label="场景名称:">
-                    <el-input style="width:300px" v-model="form.name"/>
-                </el-form-item>
-                <el-form-item label="执行环境:">
+  <div>
+    <div class="form-container" style="width:100%">
+      <div > 
+        <el-form ref="form" :model="form" label-width="100px" style="margin:10px;">
+          <el-form-item label="场景名称:">
+            <el-input style="width:300px;font-size:20px;font-weight:bold" v-model="form.name"/>
+          </el-form-item>
+          <!-- <el-form-item label="执行环境:">
                     <el-input style="width:300px" v-model="form.name"/>
                 </el-form-item>
                 <el-form-item label="场景类型:">
                     <el-input style="width:300px" v-model="form.name"/>
-                </el-form-item>
-                <el-form-item label="描述:">
-                    <el-input type="textarea" style="width:500px;" v-model="form.describe"/>
-                </el-form-item>
-           </el-form>
-        </div>
-        <div class="components-container board">
-            <div style="display:inline-block;width:20%">
-                <Kanban  :key="1" :list="list1" :options="options" :activeStatus='false' class="kanban todo" header-text="接口用例列表" style="width:100%"/>
-            </div>
-            <div style="display:inline-block;width:80%">
-                <Kanban :key="2" :list="list2" :options="options" class="kanban working" header-text="接口场景"  style="width:100%" />
-            </div>
-        </div>
+          </el-form-item>-->
+          <el-form-item label="描述:">
+            <el-input type="textarea" style="width:500px;" v-model="form.describe"/>
+          </el-form-item>
+        </el-form>
+      </div>
+      <div style="text-align:center">
+        <el-button
+          type="primary"
+          style="font-weight:bold;width:98%;"
+        >保 存 场 景</el-button>
+      </div>
     </div>
+    <div class="components-container board">
+      <div style="display:inline-block;width:20%">
+        <Kanban
+          :key="1"
+          :list="list1"
+          :options="options"
+          :activeStatus="false"
+          class="kanban todo"
+          header-text="接口用例列表"
+          style="width:100%"
+        />
+      </div>
+      <div style="display:inline-block;width:80%">
+        <Kanban
+          :key="2"
+          :list="list2"
+          :options="options"
+          class="kanban working"
+          header-text="接口场景"
+          style="width:100%"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import Kanban from "@/components/Kanban";
-import { getApiList1 } from "@/api/action";
+import { getApiList1, getActionById } from "@/api/action";
 
 export default {
   name: "DragKanbanDemo",
@@ -37,6 +60,7 @@ export default {
   },
   data() {
     return {
+      urlid: this.$route.query.id,
       form: {
         name: null,
         describe: null
@@ -45,11 +69,12 @@ export default {
         group: "mission"
       },
       list1: [],
-      list2: [],
+      list2: []
     };
   },
   created() {
     this.fetchData();
+    this.fetchDatalist2();
   },
   methods: {
     onEnd() {
@@ -62,6 +87,16 @@ export default {
     fetchData() {
       getApiList1().then(response => {
         this.list1 = response.results;
+      });
+    },
+    fetchDatalist2() {
+      let id = this.urlid;
+      console.log(id);
+      getActionById(id).then(response => {
+        this.list2 = response.results[0]["action_sub"];
+        // this.form.describe = response.results[0]['describe'];
+        this.form = response.results[0];
+        console.log(this.form);
       });
     }
   }

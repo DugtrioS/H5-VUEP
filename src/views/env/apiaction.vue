@@ -30,7 +30,8 @@
 
       <el-table-column width="180px" align="center" label="日期">
         <template slot-scope="scope">
-          <span>{{ scope.row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+          <!-- <span>{{ scope.row.create_time | parseTime('{y}-{m}-{d} {h}:{i}') }}</span> -->
+          <span>{{ scope.row.create_time }}</span>
         </template>
       </el-table-column>
 
@@ -59,7 +60,7 @@
 
       <el-table-column min-width="250px" label="场景名称">
         <template slot-scope="scope">
-          <span>{{ scope.row.title }}</span>
+          <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
 
@@ -70,13 +71,8 @@
             size="small"
             icon="el-icon-edit"
             @click="scope.row.edit=!scope.row.edit"
-          >Edit</el-button>
-          <el-button
-            type="primary"
-            size="small"
-            icon="el-icon-caret-right"
-            @click="runner"
-          >Edit</el-button>
+          >EDIT</el-button>
+          <el-button type="primary" size="small" icon="el-icon-caret-right" @click="runner(scope.row.id)">RUN</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -92,7 +88,7 @@
 </template>
 
 <script>
-import { getApiList, schList } from "@/api/table";
+import { getApiAction } from "@/api/action";
 export default {
   name: "ApiAction",
   filters: {
@@ -124,7 +120,7 @@ export default {
     handleClose() {},
 
     search() {
-      getApiList(this.paginationData).then(response => {
+      getApiAction(this.paginationData).then(response => {
         if (response.code === 200) {
           this.list = response.results;
           this.paginationData.total = response.count;
@@ -136,7 +132,7 @@ export default {
     },
     fetchData() {
       this.listLoading = true;
-      getApiList(this.paginationData).then(response => {
+      getApiAction(this.paginationData).then(response => {
         this.list = response.results;
         this.listLoading = false;
         this.paginationData.total = response.count;
@@ -150,10 +146,9 @@ export default {
       this.paginationData.page = val;
       this.fetchData(this.paginationData.page);
     },
-    runner(){
-
+    runner(val) {
+        this.$router.push({ path: "/views/testcases/dndapilist?id=" + val });
     }
-
   }
 };
 </script>

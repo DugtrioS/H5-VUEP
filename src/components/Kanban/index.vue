@@ -11,7 +11,7 @@
       <div v-for="element in list" :key="element.id" class="board-item">
         <!-- {{ element.name }} {{ element.id }} -->
           <el-collapse :v-if="activeStatus" >
-            <el-collapse-item v-if="activeStatus" :title="element.title">
+            <el-collapse-item v-if="activeStatus" :title="element['base_data'][0]['api_name']">
               <div class="interface">
                 <div class="main-nav clearfix" :class="{ 'isFix': isFixed}">
                   <ul class="fr">
@@ -30,7 +30,7 @@
                           <td class="tc w100">接口名称 *</td>
                           <td class="tc">
                             <el-input
-                            v-model="element.action_sub['base_data']['api_name']"
+                            v-model="element['base_data'][0]['api_name']"
                             class="w100p" 
                             type="text" 
                             maxlength="50" 
@@ -39,7 +39,7 @@
                           </td>
                           <td class="tc w100">模块名 *</td>
                           <td class="tc">
-                            <el-select class="w100p" v-model="element.action_sub['base_data']['module']" placeholder="请选择">
+                            <el-select class="w100p" v-model="element['base_data'][0]['module']" placeholder="请选择">
                               <el-option
                                 v-for="item in options1"
                                 :key="item.value"
@@ -52,13 +52,13 @@
                         <tr>
                             <td class="tc">URL *</td>
                             <td clas="tc" colspan="3">
-                              <el-input v-model="element.action_sub['base_data']['api_url']" class="w100p" type="text" placeholder="示例：http://api.crap.cn/CustomerOrder/{id}"></el-input>
+                              <el-input v-model="element['base_data'][0]['api_url']" class="w100p" type="text" placeholder="示例：http://api.crap.cn/CustomerOrder/{id}"></el-input>
                             </td>
                         </tr>
                         <tr>
                           <td class="tc w100">请求方式 *</td>
                           <td class="tc">
-                            <el-select class="w100p" v-model="element.action_sub['base_data']['method']" placeholder="请选择">
+                            <el-select class="w100p" v-model="element['base_data'][0]['method']" placeholder="请选择">
                               <el-option
                                 v-for="item in options2"
                                 :key="item.value"
@@ -74,7 +74,7 @@
                   <div class="section" id="header">
                     <p>请求头</p>
                     <div class="content">
-                      <el-table :data="element['action_sub']['rq_header']" style="width:100%" fit>
+                      <el-table :data="element['rq_header']" style="width:100%" fit>
                         <el-table-column prop="name" label="KEY" min-width="110%">
                           <template slot-scope="scope">
                             <el-input v-model="scope.row.key" class="w100p" type="text" placeholder="KEY" border="none"></el-input>
@@ -91,13 +91,13 @@
                           </template>
                         </el-table-column>
                       </el-table>
-                      <div style="margin-top:5px;margin-right: 5px;text-align:right;" @click="addMoreData(element['action_sub']['rq_header'])"> + 添加一行</div>
+                      <div style="margin-top:5px;margin-right: 5px;text-align:right;" @click="addMoreData(element['rq_header'])"> + 添加一行</div>
                     </div>
                   </div>
                   <div class="section" id="request">
                     <p>请求参数</p>
                     <div class="content">
-                      <el-table :data="element['action_sub']['rq_params']" style="width: 100%" fit>
+                      <el-table :data="element['rq_params']" style="width: 100%" fit>
                         <el-table-column prop="name" label="KEY" min-width="90%">
                           <template slot-scope="scope">
                             <el-input v-model="scope.row.key" class="w100p" type="text" placeholder="KEY" border="none"></el-input>
@@ -132,7 +132,7 @@
                   <div class="section" id="response">
                     <p>断言</p>
                     <div class="content">
-                      <el-table :data="element['action_sub']['assert_data']" style="width: 100%" fit>
+                      <el-table :data="element['assert_data']" style="width: 100%" fit>
                         <el-table-column prop="name" label="实际参数" min-width="100%">
                           <template slot-scope="scope">
                             <el-input v-model="scope.row.actual_params" class="w100p" type="text" placeholder="" border="none"></el-input>
@@ -191,7 +191,7 @@
                   </div>
               </div>
             </el-collapse-item>
-            <el-collapse-item v-else :title="element.title">
+            <el-collapse-item v-else :title="element['base_data'][0]['api_name']">
               {{element.desc}}
             </el-collapse-item>
           </el-collapse>
