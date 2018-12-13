@@ -70,9 +70,14 @@
             type="primary"
             size="small"
             icon="el-icon-edit"
-            @click="scope.row.edit=!scope.row.edit"
+            @click="runner(scope.row.id)"
           >EDIT</el-button>
-          <el-button type="primary" size="small" icon="el-icon-caret-right" @click="runner(scope.row.id)">RUN</el-button>
+          <el-button
+            type="primary"
+            size="small"
+            icon="el-icon-caret-right"
+            @click="prepare_runner(scope.row.id)"
+          >RUN</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -84,11 +89,66 @@
       layout="prev, pager, next"
       :total="paginationData.total"
     ></el-pagination>
+
+    <div class="run_dialog">
+      <el-dialog
+        title="执行板"
+        :visible.sync="dialogVisible"
+        :fullscreen="istrue"
+        :before-close="handleClose"
+      >
+        <div>
+          <el-row style="margin-bottom:15px">
+            <div class="process_title" style="width:100%;height:30%">
+              <strong>
+                <span style="font-size:45px">{{this.process_data.name}}</span>
+              </strong>
+            </div>
+          </el-row>
+          <div style="width:100%">
+            <el-form ref="form" :model="form" style="width:33%">
+              <el-form-item>
+                <el-input v-model="form.host" placeholder="请选择执行环境"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-input v-model="form.host" placeholder="选择忽略用例类型"></el-input>
+              </el-form-item>
+            </el-form>
+          </div>
+          <div>
+            <el-button @click="start_runner()">12345</el-button>
+          </div>
+          <el-col>
+            <el-table
+              :key="Math.random()"
+              :data="process_data['executed_cases']"
+              style="width: 100%"
+            >
+              <el-table-column label="用例名称" min-width="25%">
+                <template slot-scope="scope">
+                  <span>{{scope.row.name}}</span>
+                </template>
+              </el-table-column>
+              <el-table-column label="PROCESS" min-width="65%">
+                <template slot-scope="scope">
+                  <el-progress :text-inside="true" :stroke-width="18" :percentage="5"></el-progress>
+                </template>
+              </el-table-column>
+              <el-table-column label="STATUS" min-width="10%">
+                <template slot-scope="scope">
+                  <span>{{scope.row.status}}</span>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-col>
+        </div>
+      </el-dialog>
+    </div>
   </div>
 </template>
 
 <script>
-import { getApiAction } from "@/api/action";
+import { getApiAction, prepare_runAction } from "@/api/action";
 export default {
   name: "ApiAction",
   filters: {
@@ -103,6 +163,14 @@ export default {
   },
   data() {
     return {
+      sit:Object,
+      sumnum: 0,
+      form: {
+        host: null
+      },
+      istrue: true,
+      process_data: {},
+      dialogVisible: false,
       paginationData: {
         page: 1,
         total: 1000,
@@ -117,8 +185,40 @@ export default {
     this.fetchData(this.paginationData.page);
   },
   methods: {
-    handleClose() {},
+    start_runner() {
+      this.sit = setInterval(this.action_runner, 1000);
+      while (this.sumnum == 50) {
+        clearInterval(this.sit);
+        this.sumnum = 0;
+      }
+    },
+    action_runner() {
+      prepare_runAction(11, false).then(response => {
+        this.process_data = response;
+        if (response.code === 200 && response.status === "执行中...") {
+          this.sumnum++;
+          console.log(response.code, response.status);
+        } else {
+          console.log(response.code, response.status);
+          clearInterval(this.sit);
+          this.sumnum = 0;
+        }
+      });
+    },
 
+    prepare_runner(val) {
+      prepare_runAction(11, true).then(response => {
+        this.process_data = response;
+        this.dialogVisible = true;
+      });
+    },
+    handleClose(done) {
+      this.$confirm("确认关闭？")
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
+    },
     search() {
       getApiAction(this.paginationData).then(response => {
         if (response.code === 200) {
@@ -147,7 +247,7 @@ export default {
       this.fetchData(this.paginationData.page);
     },
     runner(val) {
-        this.$router.push({ path: "/views/testcases/dndapilist?id=" + val });
+      this.$router.push({ path: "/views/testcases/dndapilist?id=" + val });
     }
   }
 };

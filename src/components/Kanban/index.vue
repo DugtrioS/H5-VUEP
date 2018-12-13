@@ -1,144 +1,216 @@
 <template>
   <div class="board-column">
-    <div class="board-column-header">
-      {{ headerText }}
-    </div>
-    <draggable
-      :list="list"
-      :options="options"
-      class="board-column-content"
-      >
+    <div class="board-column-header">{{ headerText }}</div>
+    <draggable :list="list" :options="options" class="board-column-content">
       <div v-for="element in list" :key="element.id" class="board-item">
         <!-- {{ element.name }} {{ element.id }} -->
-          <el-collapse :v-if="activeStatus" >
-            <el-collapse-item v-if="activeStatus" :title="element['base_data'][0]['api_name']">
-              <div class="interface">
-                <div class="main-nav clearfix" :class="{ 'isFix': isFixed}">
-                  <ul class="fr">
-                    <li class="fl"><a href="#basic">#基础信息</a></li>
-                    <li class="fl"><a href="#header">#请求头</a></li>
-                    <li class="fl"><a href="#request">#请求参数</a></li>
-                    <li class="fl"><a href="#response">#断言</a></li>
-                  </ul>
-                </div>
-                  <div class="main-content">
-                  <div class="section" id="basic">
-                    <p>基础信息（带 * 的为必填项）</p>
-                    <div class="content">
-                      <table class="table" border="1" cellspacing="0" cellpadding="0" bordercolor="#ddd" width="100%">
-                        <tr>
-                          <td class="tc w100">接口名称 *</td>
-                          <td class="tc">
-                            <el-input
+        <el-collapse :v-if="activeStatus">
+          <el-collapse-item v-if="activeStatus" :title="element['base_data'][0]['api_name']">
+            <div class="interface">
+              <div style="">
+                <el-button >
+                  123
+                </el-button>
+              </div>
+              <div class="main-nav clearfix" :class="{ 'isFix': isFixed}">
+                <ul class="fr">
+
+                  <li class="fl">
+                    <a href="#basic">#基础信息</a>
+                  </li>
+                  <li class="fl">
+                    <a href="#header">#请求头</a>
+                  </li>
+                  <li class="fl">
+                    <a href="#request">#请求参数</a>
+                  </li>
+                  <li class="fl">
+                    <a href="#response">#断言</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="main-content">
+                <div class="section" id="basic">
+                  <p>基础信息（带 * 的为必填项）   当前位置 : {{element['base_data'][0]['api_name']}}</p>
+                  <div class="content">
+                    <table
+                      class="table"
+                      border="1"
+                      cellspacing="0"
+                      cellpadding="0"
+                      bordercolor="#ddd"
+                      width="100%"
+                    >
+                      <tr>
+                        <td class="tc w100">接口名称 *</td>
+                        <td class="tc">
+                          <el-input
                             v-model="element['base_data'][0]['api_name']"
-                            class="w100p" 
-                            type="text" 
-                            maxlength="50" 
+                            class="w100p"
+                            type="text"
+                            maxlength="50"
                             placeholder="示例：获取订单列表接口"
-                            ></el-input>
-                          </td>
-                          <td class="tc w100">模块名 *</td>
-                          <td class="tc">
-                            <el-select class="w100p" v-model="element['base_data'][0]['module']" placeholder="请选择">
-                              <el-option
-                                v-for="item in options1"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                              </el-option>
-                            </el-select>
-                          </td>
-                        </tr>
-                        <tr>
-                            <td class="tc">URL *</td>
-                            <td clas="tc" colspan="3">
-                              <el-input v-model="element['base_data'][0]['api_url']" class="w100p" type="text" placeholder="示例：http://api.crap.cn/CustomerOrder/{id}"></el-input>
-                            </td>
-                        </tr>
-                        <tr>
-                          <td class="tc w100">请求方式 *</td>
-                          <td class="tc">
-                            <el-select class="w100p" v-model="element['base_data'][0]['method']" placeholder="请选择">
-                              <el-option
-                                v-for="item in options2"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                              </el-option>
-                            </el-select>
-                          </td>
-                        </tr>
-                      </table>
-                    </div>
+                          ></el-input>
+                        </td>
+                        <td class="tc w100">模块名 *</td>
+                        <td class="tc">
+                          <el-select
+                            class="w100p"
+                            v-model="element['base_data'][0]['host']"
+                            placeholder="请选择"
+                          >
+                            <el-option
+                              v-for="item in options1"
+                              :key="item.value"
+                              :label="item.label"
+                              :value="item.value"
+                            ></el-option>
+                          </el-select>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="tc">URL *</td>
+                        <td clas="tc" colspan="3">
+                          <el-input
+                            v-model="element['base_data'][0]['api_url']"
+                            class="w100p"
+                            type="text"
+                            placeholder="示例：http://api.crap.cn/CustomerOrder/{id}"
+                          ></el-input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="tc w100">请求方式 *</td>
+                        <td class="tc">
+                          <el-select
+                            class="w100p"
+                            v-model="element['base_data'][0]['method']"
+                            placeholder="请选择"
+                          >
+                            <el-option
+                              v-for="item in options2"
+                              :key="item.value"
+                              :label="item.label"
+                              :value="item.value"
+                            ></el-option>
+                          </el-select>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
-                  <div class="section" id="header">
-                    <p>请求头</p>
-                    <div class="content">
-                      <el-table :data="element['rq_header']" style="width:100%" fit>
-                        <el-table-column prop="name" label="KEY" min-width="110%">
-                          <template slot-scope="scope">
-                            <el-input v-model="scope.row.key" class="w100p" type="text" placeholder="KEY" border="none"></el-input>
-                          </template>
-                        </el-table-column>
-                        <el-table-column prop="name" label="VALUE" min-width="110%">
-                          <template slot-scope="scope">
-                            <el-input v-model="scope.row.value" class="w100p" type="text" placeholder="VALUE" border="none"></el-input>
-                          </template>
-                        </el-table-column>
-                        <el-table-column prop="operation" label="操作" min-width="15%" >
-                          <template slot-scope="scope" class="clearfix">
-                            <el-button type="danger" icon="el-icon-delete" circle class="fl" ></el-button>
-                          </template>
-                        </el-table-column>
-                      </el-table>
-                      <div style="margin-top:5px;margin-right: 5px;text-align:right;" @click="addMoreData(element['rq_header'])"> + 添加一行</div>
-                    </div>
+                </div>
+                <div class="section" id="header">
+                  <p>请求头  当前位置 : {{element['base_data'][0]['api_name']}}</p>
+                  <div class="content">
+                    <el-table :data="element['rq_header']" style="width:100%" fit>
+                      <el-table-column prop="name" label="KEY" min-width="110%">
+                        <template slot-scope="scope">
+                          <el-input
+                            v-model="scope.row.key"
+                            class="w100p"
+                            type="text"
+                            placeholder="KEY"
+                            border="none"
+                          ></el-input>
+                        </template>
+                      </el-table-column>
+                      <el-table-column prop="name" label="VALUE" min-width="110%">
+                        <template slot-scope="scope">
+                          <el-input
+                            v-model="scope.row.value"
+                            class="w100p"
+                            type="text"
+                            placeholder="VALUE"
+                            border="none"
+                          ></el-input>
+                        </template>
+                      </el-table-column>
+                      <el-table-column prop="operation" label="操作" min-width="15%">
+                        <template slot-scope="scope" class="clearfix">
+                          <el-button
+                            type="danger"
+                            icon="el-icon-delete"
+                            circle
+                            class="fl"
+                            @click="delline(element['rq_header'],scope.$index)"
+                          ></el-button>
+                        </template>
+                      </el-table-column>
+                    </el-table>
+                    <div
+                      style="margin-top:5px;margin-right: 5px;text-align:right;"
+                      @click="addMoreData(element['rq_header'])"
+                    >+ 添加一行</div>
                   </div>
-                  <div class="section" id="request">
-                    <p>请求参数</p>
-                    <div class="content">
-                      <el-table :data="element['rq_params']" style="width: 100%" fit>
-                        <el-table-column prop="name" label="KEY" min-width="90%">
-                          <template slot-scope="scope">
-                            <el-input v-model="scope.row.key" class="w100p" type="text" placeholder="KEY" border="none"></el-input>
-                          </template>
-                        </el-table-column>
-                        <el-table-column prop="name" label="VALUE" min-width="90%">
-                          <template slot-scope="scope">
-                            <el-input v-model="scope.row.value" class="w100p" type="text" placeholder="VALUE" border="none"></el-input>
-                          </template>
-                        </el-table-column>
-                        <el-table-column prop="type" label="类型" min-width="50%">
-                          <template slot-scope="scope">
-                            <el-select class="w100p no-border" v-model="value7" placeholder="">
-                              <el-option
-                                v-for="item in options7"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                              </el-option>
-                            </el-select>
-                          </template>
-                        </el-table-column>
-                        <el-table-column prop="operation" label="操作" min-width="15%" > 
-                          <template slot-scope="scope" class="clearfix">
-                            <el-button type="danger" icon="el-icon-delete" circle class="fl" ></el-button>
-                          </template>
-                        </el-table-column>
-                      </el-table>
-                      <div style="margin-top:5px;margin-right: 5px;text-align:right;"> + 添加一行</div>
-                    </div>
+                </div>
+                <div class="section" id="request">
+                  <p>请求参数  当前位置 : {{element['base_data'][0]['api_name']}}</p>
+                  <div class="content">
+                    <el-table :data="element['rq_params']" style="width: 100%" fit>
+                      <el-table-column prop="name" label="KEY" min-width="90%">
+                        <template slot-scope="scope">
+                          <el-input
+                            v-model="scope.row.key"
+                            class="w100p"
+                            type="text"
+                            placeholder="KEY"
+                            border="none"
+                          ></el-input>
+                        </template>
+                      </el-table-column>
+                      <el-table-column prop="name" label="VALUE" min-width="90%">
+                        <template slot-scope="scope">
+                          <el-input
+                            v-model="scope.row.value"
+                            class="w100p"
+                            type="text"
+                            placeholder="VALUE"
+                            border="none"
+                          ></el-input>
+                        </template>
+                      </el-table-column>
+                      <el-table-column prop="type" label="类型" min-width="50%">
+                        <template slot-scope="scope">
+                          <el-select class="w100p no-border" v-model="scope.row.check_type" placeholder>
+                            <el-option
+                              v-for="item in options7"
+                              :key="item.value"
+                              :label="item.label"
+                              :value="item.value"
+                            ></el-option>
+                          </el-select>
+                        </template>
+                      </el-table-column>
+                      <el-table-column prop="operation" label="操作" min-width="15%">
+                        <template slot-scope="scope" class="clearfix">
+                          <el-button type="danger" icon="el-icon-delete" circle class="fl"
+                          @click="delline(element['rq_params'],scope.$index)"
+                          ></el-button>
+                        </template>
+                      </el-table-column>
+                    </el-table>
+                    <div 
+                    style="margin-top:5px;margin-right: 5px;text-align:right;"
+                    @click="addMoreData(element['rq_params'])"
+                    >+ 添加一行</div>
                   </div>
-                  <div class="section" id="response">
-                    <p>断言</p>
-                    <div class="content">
-                      <el-table :data="element['assert_data']" style="width: 100%" fit>
-                        <el-table-column prop="name" label="实际参数" min-width="100%">
-                          <template slot-scope="scope">
-                            <el-input v-model="scope.row.actual_params" class="w100p" type="text" placeholder="" border="none"></el-input>
-                          </template>
-                        </el-table-column>
-                        <!-- <el-table-column prop="need" label="必填" width="100">
+                </div>
+                <div class="section" id="response">
+                  <p>断言  当前位置 : {{element['base_data'][0]['api_name']}}</p>
+                  <div class="content">
+                    <el-table :data="element['assert_data']" style="width: 100%" fit>
+                      <el-table-column prop="name" label="实际参数" min-width="100%">
+                        <template slot-scope="scope">
+                          <el-input
+                            v-model="scope.row.actual_params"
+                            class="w100p"
+                            type="text"
+                            placeholder
+                            border="none"
+                          ></el-input>
+                        </template>
+                      </el-table-column>
+                      <!-- <el-table-column prop="need" label="必填" width="100">
                           <template slot-scope="scope">
                             <el-select class="w100p no-border" v-model="value6" placeholder="">
                               <el-option
@@ -149,55 +221,64 @@
                               </el-option>
                             </el-select>
                           </template>
-                        </el-table-column> -->
-                        <el-table-column prop="type" label="比较符" min-width="30%">
-                          <template slot-scope="scope" >
-                            <el-select  class="w100p no-border" v-model="value7" placeholder="">
-                              <el-option
-                                v-for="item in options8"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                              </el-option>
-                            </el-select>
-                          </template>
-                        </el-table-column>
-                        <el-table-column prop="default" label="期望参数" min-width="100%">
-                          <template slot-scope="scope">
-                            <el-input v-model="scope.row.expect_params" class="w100p" type="text" placeholder=""></el-input>
-                          </template>
-                        </el-table-column>
-                        <el-table-column prop="type" label="类型" min-width="50%">
-                          <template slot-scope="scope">
-                            <el-select class="w100p no-border" v-model="scope.row.check_type" placeholder="">
-                              <el-option
-                                v-for="item in options9"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                              </el-option>
-                            </el-select>
-                          </template>
-                        </el-table-column>
-                        <el-table-column prop="operation" label="操作" min-width="20%">
-                          <template slot-scope="scope" class="clearfix">
-                            <el-button type="danger" icon="el-icon-delete" circle class="fl" ></el-button>
-                          </template>
-                        </el-table-column>
-                      </el-table>
-                      <div style="margin-top:5px;margin-right: 5px;text-align:right;"> + 添加一行</div>
-                    </div>
+                      </el-table-column>-->
+                      <el-table-column prop="type" label="比较符" min-width="30%">
+                        <template slot-scope="scope">
+                          <el-select class="w100p no-border" v-model="scope.row.compare" placeholder>
+                            <el-option
+                              v-for="item in options8"
+                              :key="item.value"
+                              :label="item.label"
+                              :value="item.label"
+                            ></el-option>
+                          </el-select>
+                        </template>
+                      </el-table-column>
+                      <el-table-column prop="default" label="期望参数" min-width="100%">
+                        <template slot-scope="scope">
+                          <el-input
+                            v-model="scope.row.expect_params"
+                            class="w100p"
+                            type="text"
+                            placeholder
+                          ></el-input>
+                        </template>
+                      </el-table-column>
+                      <el-table-column prop="type" label="类型" min-width="50%">
+                        <template slot-scope="scope">
+                          <el-select
+                            class="w100p no-border"
+                            v-model="scope.row.check_type"
+                            placeholder
+                          >
+                            <el-option
+                              v-for="item in options9"
+                              :key="item.value"
+                              :label="item.label"
+                              :value="item.value"
+                            ></el-option>
+                          </el-select>
+                        </template>
+                      </el-table-column>
+                      <el-table-column prop="operation" label="操作" min-width="20%">
+                        <template slot-scope="scope" class="clearfix">
+                          <el-button 
+                          @click="delline(element['assert_data'],scope.$index)"
+                          type="danger" icon="el-icon-delete" circle class="fl"></el-button>
+                        </template>
+                      </el-table-column>
+                    </el-table>
+                    <div 
+                    @click="addMoreAssertData(element['assert_data'])"
+                    style="margin-top:5px;margin-right: 5px;text-align:right;">+ 添加一行</div>
                   </div>
-                  </div>
+                </div>
               </div>
-            </el-collapse-item>
-            <el-collapse-item v-else :title="element['base_data'][0]['api_name']">
-              {{element.desc}}
-            </el-collapse-item>
-          </el-collapse>
-          
+            </div>
+          </el-collapse-item>
+          <el-collapse-item v-else :title="element['base_data'][0]['api_name']">{{element.desc}}</el-collapse-item>
+        </el-collapse>
       </div>
-      
     </draggable>
   </div>
 </template>
@@ -207,7 +288,7 @@ import draggable from "vuedraggable";
 export default {
   data() {
     return {
-      list2:[],
+      list2: [],
       isFixed: false,
       activeNames: ["1"],
       id: null,
@@ -250,30 +331,9 @@ export default {
       requestData: [
         { name: "", need: "", type: "", default: "", mark: "", operation: "" }
       ],
-      value6: 1,
-      options6: [{ label: "是", value: 1 }, { label: "否", value: 2 }],
-      value7: 1,
       options7: [
-        { label: "string", value: 1 },
-        { label: "int", value: 2 },
-        { label: "float", value: 3 },
-        { label: "long", value: 4 },
-        { label: "byte", value: 5 },
-        { label: "double", value: 6 },
-        { label: "number", value: 7 },
-        { label: "boolean", value: 8 },
-        { label: "object", value: 9 },
-        { label: "array", value: 10 },
-        { label: "array[string]", value: 11 },
-        { label: "array[int]", value: 12 },
-        { label: "array[float]", value: 13 },
-        { label: "array[long]", value: 14 },
-        { label: "array[byte]", value: 15 },
-        { label: "array[double]", value: 16 },
-        { label: "array[number]", value: 17 },
-        { label: "array[boolean]", value: 18 },
-        { label: "array[object]", value: 19 },
-        { label: "file", value: 20 }
+        { label: "NORMAL", value: 1 },
+        { label: "URL_PARAM", value: 2 }
       ],
       options8: [
         { label: ">", value: 1 },
@@ -326,11 +386,27 @@ export default {
   },
   methods: {
     addMoreData(valueA) {
-      console.log(this.list)
+      console.log(this.list);
       valueA.push({
         key: "",
         value: ""
       });
+    },
+    addMoreAssertData(valueA) {
+      valueA.push({
+        expect_params: "",
+        actual_params: "",
+        check_type:"",
+        compare:""
+      });
+    },
+    delline(valueB,valueC) {
+      {
+        valueB.splice(valueC, 1);
+        // if (valueB.length === 0) {
+        //   valueB.push({ key: "", value: "" });
+        // }
+      }
     },
     handleScroll() {
       var scrollTop =
