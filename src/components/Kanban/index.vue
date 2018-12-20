@@ -8,13 +8,10 @@
           <el-collapse-item v-if="activeStatus" :title="element['base_data'][0]['api_name']">
             <div class="interface">
               <div>
-                <el-button >
-                  123
-                </el-button>
+                <el-button>123</el-button>
               </div>
               <div class="main-nav clearfix" :class="{ 'isFix': isFixed}">
                 <ul class="fr">
-
                   <li class="fl">
                     <a href="#basic">#基础信息</a>
                   </li>
@@ -31,7 +28,7 @@
               </div>
               <div class="main-content">
                 <div class="section" id="basic">
-                  <p>基础信息（带 * 的为必填项）   当前位置 : {{element['base_data'][0]['api_name']}}</p>
+                  <p>基础信息（带 * 的为必填项） 当前位置 : {{element['base_data'][0]['api_name']}} ID:{{element['id']}}</p>
                   <div class="content">
                     <table
                       class="table"
@@ -100,7 +97,7 @@
                   </div>
                 </div>
                 <div class="section" id="header">
-                  <p>请求头  当前位置 : {{element['base_data'][0]['api_name']}}</p>
+                  <p>请求头 当前位置 : {{element['base_data'][0]['api_name']}} ID:{{element['id']}}</p>
                   <div class="content">
                     <el-table :data="element['rq_header']" style="width:100%" fit>
                       <el-table-column prop="name" label="KEY" min-width="110%">
@@ -144,7 +141,7 @@
                   </div>
                 </div>
                 <div class="section" id="request">
-                  <p>请求参数  当前位置 : {{element['base_data'][0]['api_name']}}</p>
+                  <p>请求参数 当前位置 : {{element['base_data'][0]['api_name']}} ID:{{element['id']}}</p>
                   <div class="content">
                     <el-table :data="element['rq_params']" style="width: 100%" fit>
                       <el-table-column prop="name" label="KEY" min-width="90%">
@@ -171,7 +168,11 @@
                       </el-table-column>
                       <el-table-column prop="type" label="类型" min-width="50%">
                         <template slot-scope="scope">
-                          <el-select class="w100p no-border" v-model="scope.row.check_type" placeholder>
+                          <el-select
+                            class="w100p no-border"
+                            v-model="scope.row.check_type"
+                            placeholder
+                          >
                             <el-option
                               v-for="item in options7"
                               :key="item.value"
@@ -183,20 +184,24 @@
                       </el-table-column>
                       <el-table-column prop="operation" label="操作" min-width="15%">
                         <template slot-scope="scope" class="clearfix">
-                          <el-button type="danger" icon="el-icon-delete" circle class="fl"
-                          @click="delline(element['rq_params'],scope.$index)"
+                          <el-button
+                            type="danger"
+                            icon="el-icon-delete"
+                            circle
+                            class="fl"
+                            @click="delline(element['rq_params'],scope.$index)"
                           ></el-button>
                         </template>
                       </el-table-column>
                     </el-table>
-                    <div 
-                    style="margin-top:5px;margin-right: 5px;text-align:right;"
-                    @click="addMoreData(element['rq_params'])"
+                    <div
+                      style="margin-top:5px;margin-right: 5px;text-align:right;"
+                      @click="addMoreData(element['rq_params'])"
                     >+ 添加一行</div>
                   </div>
                 </div>
                 <div class="section" id="response">
-                  <p>断言  当前位置 : {{element['base_data'][0]['api_name']}}</p>
+                  <p>断言 当前位置 : {{element['base_data'][0]['api_name']}} ID:{{element['id']}}</p>
                   <div class="content">
                     <el-table :data="element['assert_data']" style="width: 100%" fit>
                       <el-table-column prop="name" label="实际参数" min-width="100%">
@@ -224,7 +229,11 @@
                       </el-table-column>-->
                       <el-table-column prop="type" label="比较符" min-width="30%">
                         <template slot-scope="scope">
-                          <el-select class="w100p no-border" v-model="scope.row.compare" placeholder>
+                          <el-select
+                            class="w100p no-border"
+                            v-model="scope.row.compare"
+                            placeholder
+                          >
                             <el-option
                               v-for="item in options8"
                               :key="item.value"
@@ -262,15 +271,20 @@
                       </el-table-column>
                       <el-table-column prop="operation" label="操作" min-width="20%">
                         <template slot-scope="scope" class="clearfix">
-                          <el-button 
-                          @click="delline(element['assert_data'],scope.$index)"
-                          type="danger" icon="el-icon-delete" circle class="fl"></el-button>
+                          <el-button
+                            @click="delline(element['assert_data'],scope.$index)"
+                            type="danger"
+                            icon="el-icon-delete"
+                            circle
+                            class="fl"
+                          ></el-button>
                         </template>
                       </el-table-column>
                     </el-table>
-                    <div 
-                    @click="addMoreAssertData(element['assert_data'])"
-                    style="margin-top:5px;margin-right: 5px;text-align:right;">+ 添加一行</div>
+                    <div
+                      @click="addMoreAssertData(element['assert_data'])"
+                      style="margin-top:5px;margin-right: 5px;text-align:right;"
+                    >+ 添加一行</div>
                   </div>
                 </div>
               </div>
@@ -302,7 +316,7 @@ export default {
         { label: "GET", value: 1 },
         { label: "POST", value: 2 },
         { label: "PUT", value: 3 },
-        { label: "WS", value: 3 }
+        { label: "WS", value: 4 }
       ],
       value3: 1,
       options3: [
@@ -383,10 +397,10 @@ export default {
     }
   },
   methods: {
-    getEnvs(){
-      getEnv().then(response =>{
+    getEnvs() {
+      getEnv().then(response => {
         this.options1 = response.results;
-      })
+      });
     },
     addMoreData(valueA) {
       console.log(this.list);
@@ -399,11 +413,11 @@ export default {
       valueA.push({
         expect_params: "",
         actual_params: "",
-        check_type:"",
-        compare:""
+        check_type: "",
+        compare: ""
       });
     },
-    delline(valueB,valueC) {
+    delline(valueB, valueC) {
       {
         valueB.splice(valueC, 1);
         // if (valueB.length === 0) {
