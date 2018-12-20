@@ -97,26 +97,43 @@
         :fullscreen="istrue"
         :before-close="handleClose"
       >
-        <div>
-          <el-row style="margin-bottom:15px">
-            <div class="process_title" style="width:100%;height:30%">
-              <strong>
-                <span style="font-size:45px">{{this.process_data.name}}</span>
-              </strong>
+        <div style="width:100%">
+          <div style="width:70%;display:inline-block">
+            <el-row style="margin-bottom:15px">
+              <div class="process_title" style="width:100%;height:30%">
+                <strong>
+                  <span style="font-size:45px">{{this.process_data.name}}</span>
+                </strong>
+              </div>
+            </el-row>
+            <div style="width:75%;display:inline-block">
+              <el-form ref="form" :model="prepare_data" style="width:100%">
+                <el-form-item>
+                  <el-input v-model="prepare_data.envid" placeholder="请选择执行环境"></el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-input v-model="prepare_data.prepare_version" placeholder="选择忽略用例类型"></el-input>
+                </el-form-item>
+              </el-form>
             </div>
-          </el-row>
-          <div style="width:100%">
-            <el-form ref="form" :model="form" style="width:33%">
-              <el-form-item>
-                <el-input v-model="form.host" placeholder="请选择执行环境"></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-input v-model="form.host" placeholder="选择忽略用例类型"></el-input>
-              </el-form-item>
-            </el-form>
+          </div>
+          <div style="width:30%;height:100%;display:inline-block;float:right">
+            <!-- <div>
+              <strong>
+                <span style="font-size:35px">执行进度</span>
+              </strong>
+            </div>-->
+            <div>
+              <el-progress :width="200" type="circle" :percentage="percentage"></el-progress>
+            </div>
           </div>
           <div>
-            <el-button @click="start_runner()">12345</el-button>
+            <el-button
+              style="width:300px"
+              type="success"
+              @click="start_runner()"
+              :loading="isbuttonloading"
+            >执 行</el-button>
           </div>
           <el-col>
             <el-table
@@ -129,9 +146,15 @@
                   <span>{{scope.row.name}}</span>
                 </template>
               </el-table-column>
-              <el-table-column label="PROCESS" min-width="65%">
+              <el-table-column label="概况" min-width="65%">
                 <template slot-scope="scope">
-                  <el-progress :text-inside="true" :stroke-width="18" :percentage="5"></el-progress>
+                  <span>
+                    校验个数:
+                    成功个数:
+                    失败个数:
+                    成功率:
+                    耗时:
+                  </span>
                 </template>
               </el-table-column>
               <el-table-column label="STATUS" min-width="10%">
@@ -163,11 +186,15 @@ export default {
   },
   data() {
     return {
-      sit:Object,
-      sumnum: 0,
-      form: {
-        host: null
+      prepare_data:{
+        envid:null,
+        prepare_version:null 
       },
+      run_id:0,
+      isbuttonloading:false,
+      percentage:0,
+      sit: Object,
+      sumnum: 0,
       istrue: true,
       process_data: {},
       dialogVisible: false,
@@ -186,6 +213,7 @@ export default {
   },
   methods: {
     start_runner() {
+      this.isbuttonloading = true;
       this.sit = setInterval(this.action_runner, 1000);
       while (this.sumnum == 50) {
         clearInterval(this.sit);
@@ -193,8 +221,9 @@ export default {
       }
     },
     action_runner() {
-      prepare_runAction(11, false).then(response => {
+      prepare_runAction(this.run_id,this.prepare_data.envid,this.prepare_data.prepare_version,false).then(response => {
         this.process_data = response;
+        this.percentage = response['process'];
         if (response.code === 200 && response.status === "执行中...") {
           this.sumnum++;
           console.log(response.code, response.status);
@@ -202,12 +231,14 @@ export default {
           console.log(response.code, response.status);
           clearInterval(this.sit);
           this.sumnum = 0;
+          this.isbuttonloading = false;
         }
       });
     },
 
     prepare_runner(val) {
-      prepare_runAction(11, true).then(response => {
+      this.run_id=val;
+      prepare_runAction(val,this.prepare_data.envid,this.prepare_data.prepare_version,true).then(response => {
         this.process_data = response;
         this.dialogVisible = true;
       });
@@ -215,6 +246,9 @@ export default {
     handleClose(done) {
       this.$confirm("确认关闭？")
         .then(_ => {
+          this.run_id=0;
+          this.isbuttonloading=false;
+          this.percentage=0;
           done();
         })
         .catch(_ => {});

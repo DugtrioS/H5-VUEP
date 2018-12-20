@@ -37,12 +37,14 @@ export function saveAction(id, value) {
   })
 }
 
-export function prepare_runAction(id, prepare) {
+export function prepare_runAction(id, envid, prepare_version, prepare) {
   return request({
     url: '/run/actions/' + id + '/',
     method: 'post',
     data: {
-      'prepare': prepare
+      version: prepare_version,
+      prepare: prepare,
+      id: envid
     }
   })
 }

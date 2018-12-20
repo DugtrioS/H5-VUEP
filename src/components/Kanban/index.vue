@@ -7,7 +7,7 @@
         <el-collapse :v-if="activeStatus">
           <el-collapse-item v-if="activeStatus" :title="element['base_data'][0]['api_name']">
             <div class="interface">
-              <div style="">
+              <div>
                 <el-button >
                   123
                 </el-button>
@@ -52,7 +52,7 @@
                             placeholder="示例：获取订单列表接口"
                           ></el-input>
                         </td>
-                        <td class="tc w100">模块名 *</td>
+                        <td class="tc w100">HOST *</td>
                         <td class="tc">
                           <el-select
                             class="w100p"
@@ -61,9 +61,9 @@
                           >
                             <el-option
                               v-for="item in options1"
-                              :key="item.value"
-                              :label="item.label"
-                              :value="item.value"
+                              :key="item.id"
+                              :label="item.name"
+                              :value="item.id"
                             ></el-option>
                           </el-select>
                         </td>
@@ -91,7 +91,7 @@
                               v-for="item in options2"
                               :key="item.value"
                               :label="item.label"
-                              :value="item.value"
+                              :value="item.label"
                             ></el-option>
                           </el-select>
                         </td>
@@ -176,7 +176,7 @@
                               v-for="item in options7"
                               :key="item.value"
                               :label="item.label"
-                              :value="item.value"
+                              :value="item.label"
                             ></el-option>
                           </el-select>
                         </template>
@@ -255,7 +255,7 @@
                               v-for="item in options9"
                               :key="item.value"
                               :label="item.label"
-                              :value="item.value"
+                              :value="item.label"
                             ></el-option>
                           </el-select>
                         </template>
@@ -283,6 +283,7 @@
   </div>
 </template>
 <script>
+import { getEnv } from "@/api/env";
 import draggable from "vuedraggable";
 
 export default {
@@ -295,11 +296,7 @@ export default {
       // 基础信息
       isFixed: false,
       value: 1,
-      options1: [
-        { label: "模块1", value: 1 },
-        { label: "模块2", value: 2 },
-        { label: "模块3", value: 3 }
-      ],
+      options1: [],
       value2: 1,
       options2: [
         { label: "GET", value: 1 },
@@ -357,6 +354,7 @@ export default {
     draggable
   },
   mounted() {
+    this.getEnvs();
     window.addEventListener("scroll", this.handleScroll);
     this.id = this.$route.query.id;
   },
@@ -385,6 +383,11 @@ export default {
     }
   },
   methods: {
+    getEnvs(){
+      getEnv().then(response =>{
+        this.options1 = response.results;
+      })
+    },
     addMoreData(valueA) {
       console.log(this.list);
       valueA.push({
