@@ -11,6 +11,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="search()" style="width:110px">搜 索</el-button>
+        <el-button type="primary" @click="newapiaction()" style="width:110px">新 增 场 景</el-button>
       </el-form-item>
     </el-form>
     <!-- TABLE -->
