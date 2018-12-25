@@ -33,6 +33,10 @@
           style="font-weight:bold;width:98%;"
           @click="saveActionFuc()"
         >保 存 场 景</el-button>
+        <div style="margin-top:5px">
+          <el-input style="width:90%;" v-model="serch_page"/>
+          <el-button style="width:8%;" @click="serch_()">搜 索 用 例</el-button>
+        </div>
       </div>
     </div>
     <div class="components-container board">
@@ -62,7 +66,12 @@
 </template>
 <script>
 import Kanban from "@/components/Kanban";
-import { getApiList1, getActionById, saveAction } from "@/api/action";
+import {
+  getApiList1,
+  getActionById,
+  saveAction,
+  getApiListByKey
+} from "@/api/action";
 
 export default {
   name: "DragKanbanDemo",
@@ -71,6 +80,7 @@ export default {
   },
   data() {
     return {
+      serch_page: "",
       action_type_options: [
         { label: "普通", value: 1 },
         { label: "可被继承", value: 2 }
@@ -95,6 +105,23 @@ export default {
     this.fetchDatalist2();
   },
   methods: {
+    compareArr(arra, arrb) {
+      for (var i = 0; i < arra.length; i++) {
+        for (var j = 0; j < arrb.length; j++) {
+          if (arra[i]["id"] === arrb[j]["id"]) {
+            arra.splice(i, 1);
+          }
+        }
+      }
+      return arra;
+    },
+    serch_() {
+      getApiListByKey(this.serch_page).then(response => {
+        if (response.code === 200) {
+          this.list1 = this.compareArr(response.results, this.list2);
+        }
+      });
+    },
     saveActionFuc() {
       saveAction(this.urlid, this.form).then(response => {
         if (response.code === 200) {
@@ -105,8 +132,7 @@ export default {
             type: "success"
           });
           console.log(this.form);
-        }
-        else{
+        } else {
           this.$notify({
             title: "错误",
             message: "出现了未知的问题！！！"

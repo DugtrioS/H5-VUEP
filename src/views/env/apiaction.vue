@@ -110,7 +110,14 @@
             <div style="width:75%;display:inline-block">
               <el-form ref="form" :model="prepare_data" style="width:100%">
                 <el-form-item>
-                  <el-input v-model="prepare_data.envid" placeholder="请选择执行环境"></el-input>
+                  <el-select v-model="prepare_data.envid" placeholder="请选择执行环境">
+                    <el-option
+                      v-for="item in options1"
+                      :key="item.id"
+                      :label="item.name"
+                      :value="item.name"
+                    ></el-option>
+                  </el-select>
                 </el-form-item>
                 <el-form-item>
                   <el-input v-model="prepare_data.prepare_version" placeholder="选择忽略用例类型"></el-input>
@@ -138,11 +145,11 @@
           </div>
           <el-col>
             <el-table
-              :key="Math.random()"
               :data="process_data['executed_cases']"
               style="width: 100%"
+              :row-class-name="tableRowClassName"
             >
-              <el-table-column label="用例名称" min-width="25%">
+              <el-table-column label="用例名称" min-width="20%">
                 <template slot-scope="scope">
                   <span>{{scope.row.name}}</span>
                 </template>
@@ -150,15 +157,14 @@
               <el-table-column label="概况" min-width="65%">
                 <template slot-scope="scope">
                   <span>
-                    校验个数:
-                    成功个数:
-                    失败个数:
-                    成功率:
-                    耗时:
+                    校验个数:{{scope.row.vp_count}}个
+                    成功个数:{{scope.row.success_count}}个
+                    失败个数:{{scope.row.failure_count}}个
+                    成功率:{{scope.row.success_rate}}%
                   </span>
                 </template>
               </el-table-column>
-              <el-table-column label="STATUS" min-width="10%">
+              <el-table-column label="STATUS(http code)" min-width="15%">
                 <template slot-scope="scope">
                   <span>{{scope.row.status}}</span>
                 </template>
@@ -173,6 +179,7 @@
 
 <script>
 import { getApiAction, prepare_runAction } from "@/api/action";
+import { getEnv } from "@/api/env";
 export default {
   name: "ApiAction",
   filters: {
@@ -187,13 +194,14 @@ export default {
   },
   data() {
     return {
-      prepare_data:{
-        envid:null,
-        prepare_version:null 
+      options1: [],
+      prepare_data: {
+        envid: null,
+        prepare_version: null
       },
-      run_id:0,
-      isbuttonloading:false,
-      percentage:0,
+      run_id: 0,
+      isbuttonloading: false,
+      percentage: 0,
       sit: Object,
       sumnum: 0,
       istrue: true,
@@ -212,7 +220,23 @@ export default {
   created() {
     this.fetchData(this.paginationData.page);
   },
+  mounted() {
+    this.getEnvs();
+  },
   methods: {
+    getEnvs() {
+      getEnv().then(response => {
+        this.options1 = response.results;
+      });
+    },
+    tableRowClassName(row) {
+      if (row.number === 1 && this.isActive) {
+        return "warning-row";
+      } else if (row.number === 3 && this.isActive) {
+        return "success-row";
+      }
+      return "";
+    },
     start_runner() {
       this.isbuttonloading = true;
       this.sit = setInterval(this.action_runner, 1000);
@@ -222,9 +246,14 @@ export default {
       }
     },
     action_runner() {
-      prepare_runAction(this.run_id,this.prepare_data.envid,this.prepare_data.prepare_version,false).then(response => {
+      prepare_runAction(
+        this.run_id,
+        this.prepare_data.envid,
+        this.prepare_data.prepare_version,
+        false
+      ).then(response => {
         this.process_data = response;
-        this.percentage = response['process'];
+        this.percentage = response["process"];
         if (response.code === 200 && response.status === "执行中...") {
           this.sumnum++;
           console.log(response.code, response.status);
@@ -238,8 +267,13 @@ export default {
     },
 
     prepare_runner(val) {
-      this.run_id=val;
-      prepare_runAction(val,this.prepare_data.envid,this.prepare_data.prepare_version,true).then(response => {
+      this.run_id = val;
+      prepare_runAction(
+        val,
+        this.prepare_data.envid,
+        this.prepare_data.prepare_version,
+        true
+      ).then(response => {
         this.process_data = response;
         this.dialogVisible = true;
       });
@@ -247,9 +281,9 @@ export default {
     handleClose(done) {
       this.$confirm("确认关闭？")
         .then(_ => {
-          this.run_id=0;
-          this.isbuttonloading=false;
-          this.percentage=0;
+          this.run_id = 0;
+          this.isbuttonloading = false;
+          this.percentage = 0;
           done();
         })
         .catch(_ => {});
@@ -303,5 +337,12 @@ export default {
 }
 .edit-input {
   padding-right: 100px;
+}
+.el-table .warning-row {
+  background: rgb(226, 110, 125);
+}
+
+.el-table .success-row {
+  background: #b7f099;
 }
 </style>

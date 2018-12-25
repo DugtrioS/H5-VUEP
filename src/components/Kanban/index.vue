@@ -44,7 +44,7 @@
                           <el-input
                             v-model="element['base_data'][0]['api_name']"
                             class="w100p"
-                            type="text"
+                            type="textarea"
                             maxlength="50"
                             placeholder="示例：获取订单列表接口"
                           ></el-input>
@@ -60,7 +60,7 @@
                               v-for="item in options1"
                               :key="item.id"
                               :label="item.name"
-                              :value="item.id"
+                              :value="item.name"
                             ></el-option>
                           </el-select>
                         </td>
@@ -71,7 +71,7 @@
                           <el-input
                             v-model="element['base_data'][0]['api_url']"
                             class="w100p"
-                            type="text"
+                            type="textarea"
                             placeholder="示例：http://api.crap.cn/CustomerOrder/{id}"
                           ></el-input>
                         </td>
@@ -103,9 +103,10 @@
                       <el-table-column prop="name" label="KEY" min-width="110%">
                         <template slot-scope="scope">
                           <el-input
+                            autosize
                             v-model="scope.row.key"
                             class="w100p"
-                            type="text"
+                            type="textarea"
                             placeholder="KEY"
                             border="none"
                           ></el-input>
@@ -114,9 +115,10 @@
                       <el-table-column prop="name" label="VALUE" min-width="110%">
                         <template slot-scope="scope">
                           <el-input
+                            autosize  
                             v-model="scope.row.value"
                             class="w100p"
-                            type="text"
+                            type="textarea"
                             placeholder="VALUE"
                             border="none"
                           ></el-input>
@@ -147,9 +149,10 @@
                       <el-table-column prop="name" label="KEY" min-width="90%">
                         <template slot-scope="scope">
                           <el-input
+                            autosize
                             v-model="scope.row.key"
                             class="w100p"
-                            type="text"
+                            type="textarea"
                             placeholder="KEY"
                             border="none"
                           ></el-input>
@@ -158,9 +161,10 @@
                       <el-table-column prop="name" label="VALUE" min-width="90%">
                         <template slot-scope="scope">
                           <el-input
+                            :autosize="{ minRows: 2, maxRows: 4}"
                             v-model="scope.row.value"
                             class="w100p"
-                            type="text"
+                            type="textarea"
                             placeholder="VALUE"
                             border="none"
                           ></el-input>
@@ -207,6 +211,7 @@
                       <el-table-column prop="name" label="实际参数" min-width="100%">
                         <template slot-scope="scope">
                           <el-input
+                            autosize
                             v-model="scope.row.actual_params"
                             class="w100p"
                             type="text"
@@ -246,6 +251,7 @@
                       <el-table-column prop="default" label="期望参数" min-width="100%">
                         <template slot-scope="scope">
                           <el-input
+                            autosize 
                             v-model="scope.row.expect_params"
                             class="w100p"
                             type="text"
@@ -351,10 +357,7 @@ export default {
         { label: "<", value: 2 },
         { label: ">=", value: 3 },
         { label: "<=", value: 4 },
-        { label: "==", value: 5 },
-        { label: "?", value: 6 },
-        { label: "!", value: 7 },
-        { label: "⊆", value: 8 }
+        { label: "==", value: 5 }
       ],
       options9: [
         { label: "SQL", value: 1 },
