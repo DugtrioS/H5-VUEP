@@ -54,7 +54,6 @@
         align="center">
       <template slot-scope="scope">
         <el-button type="primary" size="small" @click="dialogVisible = true">查 看</el-button>
-        <el-button type="primary" size="small" @click="gotoNewcases(scope.row.id)">新增用例</el-button>
       </template>
       </el-table-column>
     </el-table>
@@ -153,9 +152,6 @@ export default {
         this.listLoading = false;
         this.paginationData.total = response.count;
       });
-    },
-    gotoNewcases(val) {
-      this.$router.push({ path: "/views/table/interface?ID=" + val });
     },
     // handleSizeChange(val) {
     //   console.log(`每页 ${val} 条`);

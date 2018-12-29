@@ -115,7 +115,7 @@
                       v-for="item in options1"
                       :key="item.id"
                       :label="item.name"
-                      :value="item.name"
+                      :value="item.id"
                     ></el-option>
                   </el-select>
                 </el-form-item>
@@ -224,6 +224,9 @@ export default {
     this.getEnvs();
   },
   methods: {
+    newapiaction(){
+      this.$router.push({ path: "/views/testcases/dndapilist"});
+    },
     getEnvs() {
       getEnv().then(response => {
         this.options1 = response.results;

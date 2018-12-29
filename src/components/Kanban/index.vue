@@ -7,9 +7,9 @@
         <el-collapse :v-if="activeStatus">
           <el-collapse-item v-if="activeStatus" :title="element['base_data'][0]['api_name']">
             <div class="interface">
-              <div>
+              <!-- <div>
                 <el-button>123</el-button>
-              </div>
+              </div> -->
               <div class="main-nav clearfix" :class="{ 'isFix': isFixed}">
                 <ul class="fr">
                   <li class="fl">
@@ -60,7 +60,7 @@
                               v-for="item in options1"
                               :key="item.id"
                               :label="item.name"
-                              :value="item.name"
+                              :value="item.id"
                             ></el-option>
                           </el-select>
                         </td>

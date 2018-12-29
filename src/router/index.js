@@ -194,17 +194,23 @@ export const constantRouterMap = [
         component: () => import('@/views/report/reportlist'),
         meta: { title: '报告列表', icon: 'form' }},
       {
-        path: 'reportlistJ',
-        component: () => import('@/views/report/reportlistJ'),
-        name: 'ApirePort',
-        meta: { title: 'API报告', icon: 'form' }
-      },
-      {
-        path: 'uireport',
-        component: () => import('@/views/report/uireport'),
-        name: 'UiReport',
-        meta: { title: 'UI报告', icon: 'form' }
+        path: 'reportapidetail',
+        hidden: true,
+        name: 'Reportapidetail',
+        component: () => import('@/views/report/reportapidetail')
       }
+      // {
+      //   path: 'reportlistJ',
+      //   component: () => import('@/views/report/reportlistJ'),
+      //   name: 'ApirePort',
+      //   meta: { title: 'API报告', icon: 'form' }
+      // },
+      // {
+      //   path: 'uireport',
+      //   component: () => import('@/views/report/uireport'),
+      //   name: 'UiReport',
+      //   meta: { title: 'UI报告', icon: 'form' }
+      // }
     ]
   },
 

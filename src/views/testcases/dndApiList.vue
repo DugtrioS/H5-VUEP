@@ -29,10 +29,17 @@
       </div>
       <div style="text-align:center">
         <el-button
+          v-if="this.urlid!=0"
           type="primary"
           style="font-weight:bold;width:98%;"
           @click="saveActionFuc()"
         >保 存 场 景</el-button>
+        <el-button
+          v-if="this.urlid==0"
+          type="primary"
+          style="font-weight:bold;width:98%;"
+          @click="newActionFuc()"
+        >新 增 场 景</el-button>
         <div style="margin-top:5px">
           <el-input style="width:90%;" v-model="serch_page"/>
           <el-button style="width:8%;" @click="serch_()">搜 索 用 例</el-button>
@@ -70,7 +77,8 @@ import {
   getApiList1,
   getActionById,
   saveAction,
-  getApiListByKey
+  getApiListByKey,
+  newAction
 } from "@/api/action";
 
 export default {
@@ -85,7 +93,7 @@ export default {
         { label: "普通", value: 1 },
         { label: "可被继承", value: 2 }
       ],
-      urlid: this.$route.query.id,
+      urlid: this.$route.query.id ? this.$route.query.id : 0,
       form: {
         name: null,
         describe: null,
@@ -140,6 +148,24 @@ export default {
         }
       });
     },
+    newActionFuc() {
+      newAction(this.form).then(response => {
+        if (response.code === 200) {
+          // alert("===============");
+          this.$notify({
+            title: "成功",
+            message: "保存成功 >0<",
+            type: "success"
+          });
+          console.log(this.form);
+        } else {
+          this.$notify({
+            title: "错误",
+            message: "出现了未知的问题！！！"
+          });
+        }
+      });
+    },
     onEnd() {
       alert("1234567890");
     },
@@ -155,12 +181,14 @@ export default {
     fetchDatalist2() {
       let id = this.urlid;
       console.log(id);
-      getActionById(id).then(response => {
-        this.list2 = response.results[0]["action_sub"];
-        // this.form.describe = response.results[0]['describe'];
-        this.form = response.results[0];
-        console.log(this.form);
-      });
+      if (this.urlid != 0) {
+        getActionById(id).then(response => {
+          this.list2 = response.results[0]["action_sub"];
+          // this.form.describe = response.results[0]['describe'];
+          this.form = response.results[0];
+          console.log(this.form);
+        });
+      }
     }
   }
 };
