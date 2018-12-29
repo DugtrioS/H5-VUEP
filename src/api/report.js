@@ -20,3 +20,17 @@ export function getUiCaseRepById(id) {
     method: 'get'
   })
 }
+
+export function getReports() {
+  return request({
+    url: '/reports/',
+    method: 'get'
+  })
+}
+
+export function getReportDetail(id) {
+  return request({
+    url: '/reports/' + id,
+    method: 'get'
+  })
+}

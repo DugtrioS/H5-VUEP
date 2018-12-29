@@ -1,140 +1,146 @@
 <template>
+  <div>
     <div>
-        <div>
-            <header>
-                <h3> 测试报告总汇</h3>
-            </header>
-        </div>
-        <!-- <div id="leftChart">
+      <header>
+        <h3>测试报告总汇</h3>
+      </header>
+    </div>
+    <!-- <div id="leftChart">
             <chart height="100%" width="100%" :rawData="list"/>
         </div>
         <div id="rightChart">
             
-        </div> -->
-        <el-row :gutter="25">
-          <el-col :lg="8">
-            <div class="chart-wrapper">
-              <pie-chart/>
-            </div>
-          </el-col>
-          <el-col :lg="16">
-            <div class="chart-wrapper">
-              <chart height="300px" width="100%" :rawData="list"/>
-            </div>
-          </el-col>
-        </el-row>
-        <div id="upHere">
-            <el-table
-            v-loading="listLoading"
-            :data="reportlistdata"
-            element-loading-text="Loading"
-            border
-            fit
-            highlight-current-row
-            @row-click="rowClick">
-                  <el-table-column type="expand">
-                    <template slot-scope="props">
-                        <el-form label-position="left" inline class="demo-table-expand">
-                            <el-form-item label="名称: ">
-                                <span>{{ props.row.name }}</span>
-                            </el-form-item>
-                            <el-form-item>
-                            </el-form-item>
-                            <el-form-item label="接口地址： ">
-                                <span>{{ props.row.apiAddress }}</span>
-                            </el-form-item>
-                            <el-form-item label="请求方式： ">
-                                <span>{{ props.row.requestType }}</span>
-                            </el-form-item>
-                            <el-form-item label="测试结果： ">
-                                <span>{{ props.row.result }}</span>
-                            </el-form-item>
-                            <el-form-item>
-                            </el-form-item>
-                            <el-form-item label="请求头： ">
-                                <span style="word-break: break-all;overflow:auto;overflow-x:hidden">{{ props.row.header }}</span>
-                            </el-form-item>
-                            <el-form-item label="返回头： ">
-                                <span style="word-break: break-all;overflow:auto;overflow-x:hidden">{{props.row.responseHeader}}</span>
-                            </el-form-item>
-                            <el-form-item label="请求参数： ">
-                                <span style="word-break: break-all;overflow:auto;overflow-x:hidden">{{ props.row.parameter }}</span>
-                            </el-form-item>
-                            <el-form-item label="返回结果： ">
-                                <span style="word-break: break-all;overflow:auto;overflow-x:hidden">{{props.row.responseData}}</span>
-                            </el-form-item>
-                        </el-form>
-                    </template>
-                </el-table-column>
-                <el-table-column align="center" label="ID" width="80px">
-                    <template slot-scope="scope">
-                        {{scope.row.id}}
-                    </template>
-                </el-table-column>
-                <el-table-column align="center" label="名称" width="auto">
-                    <template slot-scope="scope">
-                        {{scope.row.id}}
-                    </template>
-                </el-table-column>
-                <el-table-column align="center" label="测试时间" width="auto">
-                    <template slot-scope="scope">
-                        {{scope.row.id}}
-                    </template>
-                </el-table-column>
-                <el-table-column align="center" label="用例数量" width="auto">
-                    <template slot-scope="scope">
-                        {{scope.row.id}}
-                    </template>
-                </el-table-column>
-                <el-table-column align="center" label="PASS个数" width="auto">
-                    <template slot-scope="scope">
-                        {{scope.row.id}}
-                    </template>
-                </el-table-column>
-                <el-table-column align="center" label="FAIL个数" width="auto">
-                    <template slot-scope="scope">
-                        {{scope.row.id}}
-                    </template>
-                </el-table-column>
-                <el-table-column align="center" label="环境" width="auto">
-                    <template slot-scope="scope">
-                        {{scope.row.id}}
-                    </template>
-                </el-table-column>
-                <el-table-column align="center" label="耗时" width="auto">
-                    <template slot-scope="scope">
-                        {{scope.row.id}}mm
-                    </template>
-                </el-table-column>
-                <el-table-column align=center label="详细" width="150px">
-                    <template slot-scope="scope">
-                        <el-tag id="tagStyle" :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
-                        <el-button id="buttonStyle" type="primary" size="small" @click="jumpToDetail(scope.row.id)">查看</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
+    </div>-->
+    <el-row :gutter="25">
+      <el-col :lg="8">
+        <div class="chart-wrapper">
+          <pie-chart/>
         </div>
+      </el-col>
+      <el-col :lg="16">
+        <div class="chart-wrapper">
+          <chart height="300px" width="100%" :rawData="list"/>
+        </div>
+      </el-col>
+    </el-row>
+    <div id="upHere">
+      <el-table
+        v-loading="listLoading"
+        :data="report_form"
+        element-loading-text="Loading"
+        border
+        fit
+        highlight-current-row
+      >
+        <!-- <el-table-column type="expand">
+          <template slot-scope="props">
+            <el-form label-position="left" inline class="demo-table-expand">
+              <el-form-item label="名称: ">
+                <span>{{ props.row.name }}</span>
+              </el-form-item>
+              <el-form-item></el-form-item>
+              <el-form-item label="接口地址： ">
+                <span>{{ props.row.apiAddress }}</span>
+              </el-form-item>
+              <el-form-item label="请求方式： ">
+                <span>{{ props.row.requestType }}</span>
+              </el-form-item>
+              <el-form-item label="测试结果： ">
+                <span>{{ props.row.result }}</span>
+              </el-form-item>
+              <el-form-item></el-form-item>
+              <el-form-item label="请求头： ">
+                <span
+                  style="word-break: break-all;overflow:auto;overflow-x:hidden"
+                >{{ props.row.header }}</span>
+              </el-form-item>
+              <el-form-item label="返回头： ">
+                <span
+                  style="word-break: break-all;overflow:auto;overflow-x:hidden"
+                >{{props.row.responseHeader}}</span>
+              </el-form-item>
+              <el-form-item label="请求参数： ">
+                <span
+                  style="word-break: break-all;overflow:auto;overflow-x:hidden"
+                >{{ props.row.parameter }}</span>
+              </el-form-item>
+              <el-form-item label="返回结果： ">
+                <span
+                  style="word-break: break-all;overflow:auto;overflow-x:hidden"
+                >{{props.row.responseData}}</span>
+              </el-form-item>
+            </el-form>
+          </template>
+        </el-table-column>-->
+        <el-table-column align="center" label="ID" width="80px">
+          <template slot-scope="scope">{{scope.row.id}}</template>
+        </el-table-column>
+        <el-table-column align="center" label="名称" width="auto">
+          <template slot-scope="scope">{{scope.row.action_name}}</template>
+        </el-table-column>
+        <el-table-column align="center" label="测试时间" width="auto">
+          <template slot-scope="scope">
+            <span>{{scope.row.start_time | parseTime}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column align="center" label="用例数量" width="auto">
+          <template slot-scope="scope">{{scope.row.action_sub_count}}</template>
+        </el-table-column>
+        <el-table-column align="center" label="PASS个数" width="auto">
+          <template slot-scope="scope">{{scope.row.action_sub_success}}</template>
+        </el-table-column>
+        <el-table-column align="center" label="FAIL个数" width="auto">
+          <template slot-scope="scope">{{scope.row.action_sub_failure}}</template>
+        </el-table-column>
+        <el-table-column align="center" label="环境" width="auto">
+          <template slot-scope="scope">{{scope.row.env_info}}</template>
+        </el-table-column>
+        <el-table-column align="center" label="耗时" width="auto">
+          <template slot-scope="scope">{{scope.row.end_time - scope.row.start_time}}S</template>
+        </el-table-column>
+        <el-table-column align="center" label="执行者" width="auto">
+          <template slot-scope="scope">{{scope.row.runner}}mm</template>
+        </el-table-column>
+        <el-table-column align="center" label="详细" width="150px">
+          <template slot-scope="scope">
+            <el-tag id="tagStyle" :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+            <el-button
+              id="buttonStyle"
+              type="primary"
+              size="small"
+              @click="jumpToDetail(scope.row.id)"
+            >查看</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
     </div>
+  </div>
 </template>
 
 <script>
+import {parseTime} from "@/utils";
 import PieChart from "@/components/Charts/PieChart";
 import G2Line from "@/components/AntV/tingChart";
 import Chart from "@/components/Charts/mixChart";
+import { getReports } from "@/api/report";
 export default {
-  components: { Chart, G2Line ,PieChart},
+  components: { Chart, G2Line, PieChart },
   filters: {
     statusFilter(status) {
       const statusMap = {
         published: "success",
         draft: "gray",
-        deleted: "danger"
+        failure: "danger"
       };
       return statusMap[status];
+    },
+    parseTime(time){
+      return parseTime(time, '{y}-{m}-{d} {h}:{i}');
     }
   },
   data() {
     return {
+      report_form: null,
       listLoading: false,
       serverData: [
         {
@@ -198,12 +204,21 @@ export default {
         2484,
         4078
       ],
-      expands: []
+      expands: [],
+      formatTime: null
     };
   },
+  created() {
+    this.Reports();
+  },
   methods: {
+    Reports() {
+      getReports().then(response => {
+        this.report_form = response.results;
+      });
+    },
     jumpToDetail(val) {
-      alert("123123213");
+      this.$router.push({ path: "/report/reportapidetail?id=" + val});
     },
     rowClick(row, event, column) {
       //控制展开行

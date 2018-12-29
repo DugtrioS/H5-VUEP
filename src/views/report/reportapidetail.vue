@@ -9,7 +9,7 @@
         </div>
         <div style="height:50%;text-align:center;line-height:140px">
           <strong>
-            <span style="font-size:40px">test-01-12</span>
+            <span style="font-size:40px">{{this.form[0]['action_name']}}</span>
           </strong>
         </div>
       </div>
@@ -17,39 +17,71 @@
         <div style="margin:2px">
           <table style="width:100%;height:277px">
             <tr>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>Age</th>
+              <td>执行结果:</td>
+              <td>{{this.form[0]['status']}}</td>
+              <td>持续时间:</td>
+              <td>{{this.form[0]['end_time'] - this.form[0]['start_time']}}S</td>
             </tr>
             <tr>
-              <td>Jill</td>
-              <td>Smith</td>
-              <td>50</td>
+              <td>执行数量:</td>
+              <td>{{this.form[0]['action_sub_count']}}</td>
+              <td>环境:</td>
+              <td>{{this.form[0]['env_info']}}</td>
             </tr>
             <tr>
-              <td>Eve</td>
-              <td>Jackson</td>
-              <td>94</td>
+              <td>成功率:</td>
+              <td>{{this.form[0]['action_sub_success']/this.form[0]['action_sub_count']*100}}%</td>
+              <td>执行者:</td>
+              <td>{{this.form[0]['runner']}}</td>
             </tr>
           </table>
         </div>
       </div>
     </div>
     <div class="detail_contain">
-      <div class="detail_name_contain"></div>
+      <div class="detail_name_contain">
+        <el-table
+          v-loading="listLoading"
+          :data="listData"
+          element-loading-text="Loading"
+          border
+          fit
+          highlight-current-row
+          :show-header="false"
+        >
+          <el-table-column align="center" label="ID">
+            <template slot-scope="scope">
+              <span style="font-size:15px">{{scope.row}}</span>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
       <div class="detail_sub_detail_contain"></div>
     </div>
   </div>
 </template>
 
 <script>
+import {getReportDetail} from "@/api/report";
 export default {
   data() {
     return {
-      form: {
-        time: null
-      }
+      listLoading:false,
+      urlid:null,
+      listData: ["获取老师布置的单词_copy"],
+      form: {}
     };
+  },
+  created(){
+    this.urlid = this.$route.query.id;
+    this.fetch();
+  },
+  methods:{
+    fetch(){
+      getReportDetail(this.urlid).then(response =>{
+        this.form = response.results;
+      })
+    }
   }
 };
 </script>
@@ -93,7 +125,10 @@ export default {
   height: 100%;
   background-color: rgb(47, 12, 243);
 }
-table, th, td {
-  border: 1px solid black;
+table,
+th,
+td {
+  border: 0.3px solid rgba(41, 40, 40, 0.233);
+  width: 25%;
 }
 </style>
