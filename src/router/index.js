@@ -181,6 +181,7 @@ export const constantRouterMap = [
       }
     ]
   },
+  
   {
     path: '/report',
     component: Layout,
@@ -198,6 +199,37 @@ export const constantRouterMap = [
         hidden: true,
         name: 'Reportapidetail',
         component: () => import('@/views/report/reportapidetail')
+      }
+      // {
+      //   path: 'reportlistJ',
+      //   component: () => import('@/views/report/reportlistJ'),
+      //   name: 'ApirePort',
+      //   meta: { title: 'API报告', icon: 'form' }
+      // },
+      // {
+      //   path: 'uireport',
+      //   component: () => import('@/views/report/uireport'),
+      //   name: 'UiReport',
+      //   meta: { title: 'UI报告', icon: 'form' }
+      // }
+    ]
+  },
+  {
+    path: '/tools',
+    component: Layout,
+    redirect: '/tools/index',
+    name: 'Tools',
+    meta: { title: '工具', icon: 'form' },
+    children: [
+      {
+        path: 'dailytools',
+        name: 'DailyTools',
+        component: () => import('@/views/tools/daily'),
+        meta: { title: '日常工具', icon: 'form' }},
+      {
+        path: 'tools/index',
+        name: 'DadilyReport',
+        component: () => import('@/views/tools/index')
       }
       // {
       //   path: 'reportlistJ',
