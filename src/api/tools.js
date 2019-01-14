@@ -7,3 +7,11 @@ export function saveDailyReport(data) {
     data
   })
 }
+
+export function pushDingMsg(data) {
+  return request({
+    url: '/ding_msg/',
+    method: 'post',
+    data
+  })
+}

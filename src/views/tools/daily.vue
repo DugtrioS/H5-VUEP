@@ -29,6 +29,7 @@
                 placeholder="选择日期"
                 v-model="form.start_time"
                 style="width: 100%;"
+                value-format="yyyy-MM-dd hh:mm:ss"
               ></el-date-picker>
             </el-col>
           </el-form-item>
@@ -119,6 +120,7 @@
               placeholder="选择日期"
               v-model="scope.row.start_time"
               style="width: 100%;"
+              value-format="yyyy-MM-dd hh:mm:ss"
             ></el-date-picker>
           </template>
         </el-table-column>
@@ -129,6 +131,7 @@
               placeholder="选择日期"
               v-model="scope.row.end_time"
               style="width: 100%;"
+              value-format="yyyy-MM-dd hh:mm:ss"
             ></el-date-picker>
           </template>
         </el-table-column>
@@ -187,7 +190,7 @@
         <el-table-column fixed="right" label="操作" width="100">
           <template slot-scope="scope">
             <el-button @click="addtablerow" type="text" size="small">新增</el-button>
-            <el-button type="text" size="small">删除</el-button>
+            <el-button @click="delline(sub,scope.$index)" type="text" size="small">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -327,6 +330,82 @@ export default {
         {
           value: "刘卫星",
           label: "刘卫星"
+        },
+        {
+          value: "吕晶",
+          label: "吕晶"
+        },
+        {
+          value: "赵梦敏",
+          label: "赵梦敏"
+        },
+        {
+          value: "赵银静",
+          label: "赵银静"
+        },
+        {
+          value: "赵海萍",
+          label: "赵海萍"
+        },
+        {
+          value: "蒋佳乐",
+          label: "蒋佳乐"
+        },
+        {
+          value: "王俊飞",
+          label: "王俊飞"
+        },
+        {
+          value: "吕平",
+          label: "吕平"
+        },
+        {
+          value: "冯乔姗",
+          label: "冯乔姗"
+        },
+        {
+          value: "熊勇涛",
+          label: "熊勇涛"
+        },
+        {
+          value: "罗小艺",
+          label: "罗小艺"
+        },
+        {
+          value: "肖龙英",
+          label: "肖龙英"
+        },
+        {
+          value: "常玉风",
+          label: "常玉风"
+        },
+        {
+          value: "刘明达",
+          label: "刘明达"
+        },
+        {
+          value: "栾宇强",
+          label: "栾宇强"
+        },
+        {
+          value: "秦英龙",
+          label: "秦英龙"
+        },
+        {
+          value: "荣连付",
+          label: "荣连付"
+        },
+        {
+          value: "郎丽",
+          label: "郎丽"
+        },
+        {
+          value: "冯姣姣",
+          label: "冯姣姣"
+        },
+        {
+          value: "季培红",
+          label: "季培红"
         }
       ],
       projects: [{ project_name: null, project_tag: null }]
@@ -355,10 +434,14 @@ export default {
     },
     delline(valueB, valueC) {
       {
-        valueB.splice(valueC, 1);
-        // if (valueB.length === 0) {
-        //   valueB.push({ key: "", value: "" });
-        // }
+        if (valueB.length === 1) {
+          this.$notify.error({
+            title: "错误",
+            message: "至少存在一条"
+          });
+        } else {
+          valueB.splice(valueC, 1);
+        }
       }
     },
     saveInfo() {
@@ -372,6 +455,7 @@ export default {
             message: "保存成功",
             type: "success"
           });
+          
         } else {
           this.$notify.error({
             title: "错误",

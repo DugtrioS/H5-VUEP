@@ -229,7 +229,8 @@ export const constantRouterMap = [
       {
         path: 'tools/index',
         name: 'DadilyReport',
-        component: () => import('@/views/tools/index')
+        component: () => import('@/views/tools/index'),
+        meta: { title: 'dingdingBot', icon: 'form' }
       }
       // {
       //   path: 'reportlistJ',
